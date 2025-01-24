@@ -42,21 +42,27 @@ public class Bob {
                 String description = userInput.split(" ", 2)[1];
                 Task task = new Todo(description);
                 addTask(task);
-                Helper.print("Bob is on it! I've added this task:", task.toString());
+                Helper.print("Bob is on it! I've added this task:", task.toString(), "Now you have " + taskList.size() + " task(s).");
 
             // deadline
             } else if (userInput.startsWith("deadline")) {
-                String combined = userInput.split(" ", 2)[1];
-                String[] parts = combined.split(" /by ");
+                String[] parts = userInput.split(" ", 2)[1].split(" /by ");
                 String description = parts[0];
                 String by = parts[1];
                 Task task = new Deadline(description, by);
                 addTask(task);
-                Helper.print("Bob is on it! I've added this task:", task.toString());
+                Helper.print("Bob is on it! I've added this task:", task.toString(), "Now you have " + taskList.size() + " task(s).");
 
             // event
             } else if (userInput.startsWith("event")) {
-
+                String[] parts = userInput.split(" ", 2)[1].split(" /from ");
+                String description = parts[0];
+                String[] dates = parts[1].split(" /to ");
+                String from = dates[0];
+                String to = dates[1];
+                Task task = new Event(description, from, to);
+                addTask(task);
+                Helper.print("Bob is on it! I've added this task:", task.toString(), "Now you have " + taskList.size() + " task(s).");
             }
         }
         scanner.close();
