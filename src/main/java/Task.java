@@ -1,22 +1,22 @@
 public class Task {
-    private boolean isDone;
+    private boolean completed;
     private final String description;
 
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+        this.completed = false;
     }
 
     public void mark() {
-        this.isDone = true;
+        this.completed = true;
     }
 
     public void unmark() {
-        this.isDone = false;
+        this.completed = false;
     }
 
     @Override
     public String toString() {
-        return (isDone ? "[X] " : "[ ] ") + description;
+        return (this.completed ? "[X] " : "[ ] ") + description;
     }
 }
