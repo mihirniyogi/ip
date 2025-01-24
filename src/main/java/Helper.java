@@ -13,6 +13,9 @@ public class Helper {
   public static void print(String... inputs) {
     System.out.println("\t" + LINE);
     for (String input: inputs) {
+      if (input == null) {
+        continue;
+      }
       System.out.println("\t" + input);
     }
     System.out.println("\t" + LINE);
