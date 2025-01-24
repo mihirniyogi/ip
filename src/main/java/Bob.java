@@ -3,8 +3,7 @@ import java.util.Scanner;
 public class Bob {
     public static void main(String[] args) {
         
-        String[] tasks = new String[100];
-        int currentTask = 0; 
+        TaskList tasks = new TaskList();
 
         Helper.printLogo();
         Helper.print("Hello! I'm Bob ♥", "What can I do for you?");
@@ -14,14 +13,20 @@ public class Bob {
             String userInput = scanner.nextLine();
             if (userInput.equals("bye")) {
                 break;
-            }
-            if (userInput.equals("list")) {
-                Helper.print(tasks);
+            } else if (userInput.equals("list")) {
+                tasks.print();
+                continue;
+            } else if (userInput.startsWith("mark")) {
+                // mark n
+                int number = Integer.parseInt(userInput.split(" ")[1]);
+                tasks.markTask(number);
+                String taskString = tasks.getTask(number).toString();
+                Helper.print("Bob is on it! Marked the following as done:", taskString);
                 continue;
             }
-
-            tasks[currentTask] = userInput;
-            currentTask++;
+            
+            // Add task
+            tasks.addTask(userInput);
             Helper.print("added: " + userInput);
         }
         scanner.close();
