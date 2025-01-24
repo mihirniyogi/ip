@@ -1,6 +1,6 @@
 public class Helper {
   private static final String LINE = "____________________________________________________________";
-  public static final String LOGO = """
+  private static final String LOGO = """
                  ____     _____    ____
                 |  _  \\  |     |  |  _  \\
                 | |_| /  |  _  |  | |_| /
