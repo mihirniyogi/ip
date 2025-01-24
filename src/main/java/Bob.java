@@ -36,21 +36,38 @@ public class Bob {
                 unmarkTask(number);
                 Helper.print("Bob is on it! Marked the following as undone [ ]", taskList.get(number - 1).toString());
                 continue;
-            }
             
-            // Add task
-            addTask(userInput);
-            Helper.print("added: " + userInput);
+            // todo
+            } else if (userInput.startsWith("todo")) {
+                String description = userInput.split(" ", 2)[1];
+                Task task = new Todo(description);
+                addTask(task);
+                Helper.print("Bob is on it! I've added this task:", task.toString());
+
+            // deadline
+            } else if (userInput.startsWith("deadline")) {
+                String combined = userInput.split(" ", 2)[1];
+                String[] parts = combined.split(" /by ");
+                String description = parts[0];
+                String by = parts[1];
+                Task task = new Deadline(description, by);
+                addTask(task);
+                Helper.print("Bob is on it! I've added this task:", task.toString());
+
+            // event
+            } else if (userInput.startsWith("event")) {
+
+            }
         }
         scanner.close();
         Helper.print("Thank you and goodbye!");
 
     }
 
-    private static void addTask(String description) {
-        Task task = new Task(description);
+
+    private static void addTask(Task task) {
         taskList.add(task);
-    } 
+    }
 
     private static void printTasks() {
         if (taskList.isEmpty()) {
