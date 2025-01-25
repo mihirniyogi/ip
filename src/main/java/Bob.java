@@ -82,6 +82,15 @@ public class Bob {
                     Task task = new Event(description, from, to);
                     addTask(task);
                     Helper.print("Bob is on it! I've added this task:", task.toString(), "Now you have " + taskList.size() + " task(s).");
+                
+                // delete    
+                } else if (userInput.startsWith("delete")) {
+                    int number = Integer.parseInt(userInput.split(" ")[1]);
+                    String taskString = taskList.get(number - 1).toString();
+                    deleteTask(number);
+                    Helper.print("Bob is on it! Deleted this task: ", taskString , "Now you have " + taskList.size() + " task(s).");
+                
+                // command not recognised
                 } else {
                     throw new WrongCommandException("Uh oh! Bob says...I'm sorry, but I don't know what that means :(");
                 }
@@ -101,6 +110,10 @@ public class Bob {
 
     private static void addTask(Task task) {
         taskList.add(task);
+    }
+
+    private static void deleteTask(int number) {
+        taskList.remove(number - 1);
     }
 
     private static void printTasks() {
