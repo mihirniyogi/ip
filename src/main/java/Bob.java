@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import Exceptions.WrongCommandException;
 
 public class Bob {
@@ -104,6 +103,10 @@ public class Bob {
                 }
             } catch (WrongCommandException e) {
                 Helper.print(e.getMessage(), "Please try again!");
+            } catch (IndexOutOfBoundsException e) {
+                Helper.print("Uh oh! Bob says...I'm sorry, there is no such task :(");
+            } catch (NumberFormatException e) {
+                Helper.print("Uh oh! Bob says...I'm sorry, there is no such task :(");
             }
         }
         scanner.close();
