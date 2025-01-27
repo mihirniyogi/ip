@@ -7,6 +7,8 @@ public class Bob {
 
     public static void main(String[] args) {
 
+        TaskList.createFileIfNotExist();
+
         Helper.printLogo();
         Helper.print("Hello! I'm Bob!", "What can I do for you?");
         Scanner scanner = new Scanner(System.in);
@@ -106,7 +108,6 @@ public class Bob {
         Helper.print("Thank you and goodbye!");
 
     }
-
 
     private static void addTask(Task task) {
         taskList.add(task);
