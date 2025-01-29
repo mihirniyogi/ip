@@ -25,8 +25,6 @@ public class Event extends Task {
 
     @Override
     public String toCsv() {
-        String fromReadable = Helper.datetimeToReadable(this.from);
-        String toReadable = Helper.datetimeToReadable(this.to);
-        return String.format("E,%s,%b,,%s,%s", this.description, this.completed, fromReadable, toReadable);
+        return String.format("E,%s,%b,,%s,%s", this.description, this.completed, this.from, this.to);
     }
 }
