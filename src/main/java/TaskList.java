@@ -95,7 +95,7 @@ public class TaskList {
 
     public static void printTasks() {
         if (tasks.isEmpty()) {
-            Helper.print("No tasks yet!");
+            Ui.print("No tasks yet!");
             return;
         }
         int n = tasks.size();
@@ -103,7 +103,7 @@ public class TaskList {
         for (int i = 0; i < n; i++) {
             taskStrings[i] = (i + 1) + ". " + tasks.get(i).toString();
         }
-        Helper.print("Here are your tasks:", String.join("\n\t", taskStrings));
+        Ui.print("Here are your tasks:", String.join("\n\t", taskStrings));
     }
 
     public static int getCount() {

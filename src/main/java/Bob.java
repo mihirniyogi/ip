@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class Bob {
     public static void main(String[] args) {
 
-        Helper.printLogo();
-        Helper.print("Hello! I'm Bob!", "What can I do for you?");
+        Ui.printLogo();
+        Ui.print("Hello! I'm Bob!", "What can I do for you?");
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
@@ -25,14 +25,14 @@ public class Bob {
                 } else if (userInput.startsWith("mark")) {
                     int number = Integer.parseInt(userInput.split(" ")[1]);
                     TaskList.markTask(number);
-                    Helper.print("Bob is on it! Marked the following as done [X]:", 
+                    Ui.print("Bob is on it! Marked the following as done [X]:", 
                             TaskList.getTask(number).toString());
                 
                 // unmark task
                 } else if (userInput.startsWith("unmark")) {
                     int number = Integer.parseInt(userInput.split(" ")[1]);
                     TaskList.unmarkTask(number);
-                    Helper.print("Bob is on it! Marked the following as undone [ ]", 
+                    Ui.print("Bob is on it! Marked the following as undone [ ]", 
                             TaskList.getTask(number).toString());
                 
                 // todo
@@ -44,7 +44,7 @@ public class Bob {
                     String description = parts[1];
                     Task task = new Todo(description);
                     TaskList.addTask(task);
-                    Helper.print("Bob is on it! I've added this task:", 
+                    Ui.print("Bob is on it! I've added this task:", 
                             task.toString(), 
                             "Now you have " + TaskList.getCount() + " task(s).");
     
@@ -65,7 +65,7 @@ public class Bob {
 
                     Task task = new Deadline(description, by);
                     TaskList.addTask(task);
-                    Helper.print("Bob is on it! I've added this task:", 
+                    Ui.print("Bob is on it! I've added this task:", 
                             task.toString(), 
                             "Now you have " + TaskList.getCount() + " task(s).");
     
@@ -92,7 +92,7 @@ public class Bob {
                     
                     Task task = new Event(description, from, to);
                     TaskList.addTask(task);
-                    Helper.print("Bob is on it! I've added this task:", 
+                    Ui.print("Bob is on it! I've added this task:", 
                             task.toString(), 
                             "Now you have " + TaskList.getCount() + " task(s).");
                 
@@ -101,7 +101,7 @@ public class Bob {
                     int number = Integer.parseInt(userInput.split(" ")[1]);
                     Task task = TaskList.getTask(number);
                     TaskList.deleteTask(number);
-                    Helper.print("Bob is on it! Deleted this task: ", 
+                    Ui.print("Bob is on it! Deleted this task: ", 
                             task.toString(), 
                             "Now you have " + TaskList.getCount() + " task(s).");
                 
@@ -110,17 +110,17 @@ public class Bob {
                     throw new WrongCommandException("Uh oh! Bob says...I'm sorry, but I don't know what that means :(");
                 }
             } catch (WrongCommandException e) {
-                Helper.print(e.getMessage(), "Please try again!");
+                Ui.print(e.getMessage(), "Please try again!");
             } catch (IndexOutOfBoundsException e) {
-                Helper.print("Uh oh! Bob says...I'm sorry, there is no such task :(");
+                Ui.print("Uh oh! Bob says...I'm sorry, there is no such task :(");
             } catch (NumberFormatException e) {
-                Helper.print("Uh oh! Bob says...I'm sorry, there is no such task :(");
+                Ui.print("Uh oh! Bob says...I'm sorry, there is no such task :(");
             } catch (IOException e) {
-                Helper.print("Uh oh! Bob says...I'm sorry, there was an error saving the task :(");
+                Ui.print("Uh oh! Bob says...I'm sorry, there was an error saving the task :(");
             }
         }
         scanner.close();
-        Helper.print("Thank you and goodbye!");
+        Ui.print("Thank you and goodbye!");
 
     }
 }
