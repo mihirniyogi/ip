@@ -35,4 +35,24 @@ public class TaskList {
             return List.of();
         }
     }
+
+    private static Task convertLineToTask(String line) throws IllegalArgumentException {
+        String[] fields = line.split(",");
+        String type = fields[1];
+        String description = fields[2];
+        boolean done = Boolean.parseBoolean(fields[3]);
+
+        System.out.println(done);
+
+        switch (type) {
+        case "T":
+            return new Todo(description, done);
+        case "D":
+            return new Deadline(description, fields[4], done);
+        case "E":
+            return new Event(description, fields[5], fields[6], done);
+        default:
+            throw new IllegalArgumentException("Unknown task type: " + type);
+        }
+    }
 }
