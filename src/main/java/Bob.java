@@ -1,13 +1,8 @@
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Bob {
-
-    private static ArrayList<Task> taskList = new ArrayList<>();
-
     public static void main(String[] args) {
-
-        TaskList.createFileIfNotExist();
 
         Helper.printLogo();
         Helper.print("Hello! I'm Bob!", "What can I do for you?");
@@ -23,19 +18,21 @@ public class Bob {
                 
                 // list out
                 } else if (userInput.trim().equals("list")) {
-                    printTasks();
+                    TaskList.printTasks();
                 
                 // mark task
                 } else if (userInput.startsWith("mark")) {
                     int number = Integer.parseInt(userInput.split(" ")[1]);
-                    markTask(number);
-                    Helper.print("Bob is on it! Marked the following as done [X]:", taskList.get(number - 1).toString());
+                    TaskList.markTask(number);
+                    Helper.print("Bob is on it! Marked the following as done [X]:", 
+                            TaskList.getTask(number).toString());
                 
                 // unmark task
                 } else if (userInput.startsWith("unmark")) {
                     int number = Integer.parseInt(userInput.split(" ")[1]);
-                    unmarkTask(number);
-                    Helper.print("Bob is on it! Marked the following as undone [ ]", taskList.get(number - 1).toString());
+                    TaskList.unmarkTask(number);
+                    Helper.print("Bob is on it! Marked the following as undone [ ]", 
+                            TaskList.getTask(number).toString());
                 
                 // todo
                 } else if (userInput.startsWith("todo")) {
@@ -45,8 +42,10 @@ public class Bob {
                     }
                     String description = parts[1];
                     Task task = new Todo(description);
-                    addTask(task);
-                    Helper.print("Bob is on it! I've added this task:", task.toString(), "Now you have " + taskList.size() + " task(s).");
+                    TaskList.addTask(task);
+                    Helper.print("Bob is on it! I've added this task:", 
+                            task.toString(), 
+                            "Now you have " + TaskList.getCount() + " task(s).");
     
                 // deadline
                 } else if (userInput.startsWith("deadline")) {
@@ -61,8 +60,10 @@ public class Bob {
                     String description = parts[0];
                     String by = parts[1];
                     Task task = new Deadline(description, by);
-                    addTask(task);
-                    Helper.print("Bob is on it! I've added this task:", task.toString(), "Now you have " + taskList.size() + " task(s).");
+                    TaskList.addTask(task);
+                    Helper.print("Bob is on it! I've added this task:", 
+                            task.toString(), 
+                            "Now you have " + TaskList.getCount() + " task(s).");
     
                 // event
                 } else if (userInput.startsWith("event")) {
@@ -82,15 +83,19 @@ public class Bob {
                     String from = dates[0];
                     String to = dates[1];
                     Task task = new Event(description, from, to);
-                    addTask(task);
-                    Helper.print("Bob is on it! I've added this task:", task.toString(), "Now you have " + taskList.size() + " task(s).");
+                    TaskList.addTask(task);
+                    Helper.print("Bob is on it! I've added this task:", 
+                            task.toString(), 
+                            "Now you have " + TaskList.getCount() + " task(s).");
                 
                 // delete    
                 } else if (userInput.startsWith("delete")) {
                     int number = Integer.parseInt(userInput.split(" ")[1]);
-                    String taskString = taskList.get(number - 1).toString();
-                    deleteTask(number);
-                    Helper.print("Bob is on it! Deleted this task: ", taskString , "Now you have " + taskList.size() + " task(s).");
+                    Task task = TaskList.getTask(number);
+                    TaskList.deleteTask(number);
+                    Helper.print("Bob is on it! Deleted this task: ", 
+                            task.toString(), 
+                            "Now you have " + TaskList.getCount() + " task(s).");
                 
                 // command not recognised
                 } else {
@@ -102,41 +107,12 @@ public class Bob {
                 Helper.print("Uh oh! Bob says...I'm sorry, there is no such task :(");
             } catch (NumberFormatException e) {
                 Helper.print("Uh oh! Bob says...I'm sorry, there is no such task :(");
+            } catch (IOException e) {
+                Helper.print("Uh oh! Bob says...I'm sorry, there was an error saving the task :(");
             }
         }
         scanner.close();
         Helper.print("Thank you and goodbye!");
 
     }
-
-    private static void addTask(Task task) {
-        taskList.add(task);
-    }
-
-    private static void deleteTask(int number) {
-        taskList.remove(number - 1);
-    }
-
-    private static void printTasks() {
-        if (taskList.isEmpty()) {
-            Helper.print("No tasks yet!");
-            return;
-        }
-
-        int n = taskList.size();
-        String[] taskStrings = new String[n];
-        for (int i = 0; i < n; i++) {
-            taskStrings[i] = (i + 1) + ". " + taskList.get(i).toString();
-        }
-        Helper.print("Here are your tasks:", String.join("\n\t", taskStrings));
-    }
-
-    private static void markTask(int number) {
-        taskList.get(number - 1).mark();
-    }
-
-    private static void unmarkTask(int number) {
-        taskList.get(number - 1).unmark();
-    }
-
 }
