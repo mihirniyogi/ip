@@ -4,6 +4,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -55,9 +57,21 @@ public class TaskList {
         case "T":
             return new Todo(description, done);
         case "D":
-            return new Deadline(description, fields[4], done);
+            String byString = fields[4];
+            LocalDateTime by = byString.isBlank() 
+                    ? null 
+                    : LocalDateTime.parse(byString, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+            return new Deadline(description, by, done);
         case "E":
-            return new Event(description, fields[5], fields[6], done);
+            String fromString = fields[5];
+            String toString = fields[6];
+            LocalDateTime from = fromString.isBlank() 
+                    ? null 
+                    : LocalDateTime.parse(fromString, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+            LocalDateTime to = toString.isBlank() 
+                    ? null 
+                    : LocalDateTime.parse(toString, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+            return new Event(description, from, to, done);
         default:
             throw new IllegalArgumentException("Unknown task type: " + type);
         }

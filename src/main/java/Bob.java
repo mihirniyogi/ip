@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Bob {
@@ -55,10 +56,13 @@ public class Bob {
                     }
                     String[] parts = command[1].split(" /by ");
                     if (parts.length == 1 || parts[1].isBlank()) {
-                        throw new WrongCommandException("Uh oh! Bob says...a deadline task needs a '/by'. e.g. deadline return book /by Sunday");
+                        throw new WrongCommandException("Uh oh! Bob says...a deadline task needs a '/by'. e.g. deadline return book /by 18/02/2025 1800");
                     }
                     String description = parts[0];
-                    String by = parts[1];
+
+                    String byInput = parts[1];                    
+                    LocalDateTime by = Helper.inputToDateTime(byInput);
+
                     Task task = new Deadline(description, by);
                     TaskList.addTask(task);
                     Helper.print("Bob is on it! I've added this task:", 
@@ -73,15 +77,19 @@ public class Bob {
                     }
                     String[] parts = command[1].split(" /from ");
                     if (parts.length == 1 || parts[1].isBlank()) {
-                        throw new WrongCommandException("Uh oh! Bob says...an event task needs a '/from' and '/to'. e.g. event project meeting /from Monday 2pm /to Monday 4pm");
+                        throw new WrongCommandException("Uh oh! Bob says...an event task needs a '/from' and '/to'. e.g. event project meeting /from 17/04/2025 1400 /to 17/04/2025 1600");
                     }
                     String description = parts[0];
                     String[] dates = parts[1].split(" /to ");
                     if (dates.length == 1 || dates[1].isBlank()) {
-                        throw new WrongCommandException("Uh oh! Bob says...an event task needs a '/to'. e.g. event project meeting /from Monday 2pm /to Monday 4pm");
+                        throw new WrongCommandException("Uh oh! Bob says...an event task needs a '/to'. e.g. event project meeting /from 17/04/2025 1400 /to 17/04/2025 1600");
                     }
-                    String from = dates[0];
-                    String to = dates[1];
+                    String fromInput = dates[0];
+                    String toInput = dates[1];
+
+                    LocalDateTime from = Helper.inputToDateTime(fromInput);
+                    LocalDateTime to = Helper.inputToDateTime(toInput);   
+                    
                     Task task = new Event(description, from, to);
                     TaskList.addTask(task);
                     Helper.print("Bob is on it! I've added this task:", 

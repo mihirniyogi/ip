@@ -1,23 +1,27 @@
-public class Deadline extends Task {
-    private String by;
+import java.time.LocalDateTime;
 
-    public Deadline(String description, String by) {
+public class Deadline extends Task {
+    private LocalDateTime by;
+
+    public Deadline(String description, LocalDateTime by) {
         super(description);
         this.by = by;
     }
 
-    public Deadline(String description, String by, boolean completed) {
+    public Deadline(String description, LocalDateTime by, boolean completed) {
         super(description, completed);
         this.by = by;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (" + "by: " + this.by + ")";
+        String byReadable = Helper.datetimeToReadable(this.by);
+        return "[D]" + super.toString() + " (" + "by: " + byReadable + ")";
     }
 
     @Override
     public String toCsv() {
-        return String.format("D,%s,%b,%s,,", this.description, this.completed, this.by);
+        String byReadable = Helper.datetimeToReadable(this.by);
+        return String.format("D,%s,%b,%s,,", this.description, this.completed, byReadable);
     }
 }
