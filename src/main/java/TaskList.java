@@ -5,7 +5,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -60,17 +59,17 @@ public class TaskList {
             String byString = fields[4];
             LocalDateTime by = byString.isBlank() 
                     ? null 
-                    : LocalDateTime.parse(byString, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+                    : LocalDateTime.parse(byString);
             return new Deadline(description, by, done);
         case "E":
             String fromString = fields[5];
             String toString = fields[6];
             LocalDateTime from = fromString.isBlank() 
                     ? null 
-                    : LocalDateTime.parse(fromString, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+                    : LocalDateTime.parse(fromString);
             LocalDateTime to = toString.isBlank() 
                     ? null 
-                    : LocalDateTime.parse(toString, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+                    : LocalDateTime.parse(toString);
             return new Event(description, from, to, done);
         default:
             throw new IllegalArgumentException("Unknown task type: " + type);
@@ -93,25 +92,16 @@ public class TaskList {
         }
     }
 
-    public static void printTasks() {
-        if (tasks.isEmpty()) {
-            Ui.print("No tasks yet!");
-            return;
-        }
-        int n = tasks.size();
-        String[] taskStrings = new String[n];
-        for (int i = 0; i < n; i++) {
-            taskStrings[i] = (i + 1) + ". " + tasks.get(i).toString();
-        }
-        Ui.print("Here are your tasks:", String.join("\n\t", taskStrings));
-    }
-
     public static int getCount() {
         return tasks.size();
     }
 
     public static Task getTask(int number) {
         return tasks.get(number - 1);
+    }
+
+    public static List<Task> getTasks() {
+        return List.copyOf(tasks);
     }
 
     public static void addTask(Task task) throws IOException{
