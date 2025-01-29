@@ -4,6 +4,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskList {
     private static final String FILE_NAME = "tasks.csv";
@@ -18,6 +20,19 @@ public class TaskList {
             } catch (IOException e) {
                 System.err.println("Error creating file: " + e.getMessage());
             }
+        }
+    }
+
+    public static List<Task> readTasksFromFile() {
+        try {
+            List<Task> tasks = Files.lines(FILE_PATH)
+                    .skip(1)
+                    .map(TaskList::convertLineToTask)
+                    .collect(Collectors.toList());
+            return tasks;
+        } catch (IOException e) {
+            System.err.println("Error reading file: " + e.getMessage());
+            return List.of();
         }
     }
 }
