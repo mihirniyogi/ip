@@ -18,4 +18,9 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
     }
+
+    @Override
+    public String toCsv() {
+        return String.format("E,%s,%b,,%s,%s", this.description, this.completed, this.from, this.to);
+    }
 }

@@ -11,4 +11,9 @@ public class Todo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    @Override
+    public String toCsv() {
+        return String.format("T,%s,%b,,,", this.description, this.completed);
+    }
 }

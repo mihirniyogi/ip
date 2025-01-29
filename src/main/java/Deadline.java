@@ -15,4 +15,9 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (" + "by: " + this.by + ")";
     }
+
+    @Override
+    public String toCsv() {
+        return String.format("D,%s,%b,%s,,", this.description, this.completed, this.by);
+    }
 }
