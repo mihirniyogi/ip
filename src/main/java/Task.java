@@ -1,11 +1,18 @@
 public abstract class Task {
-    private boolean completed;
-    private final String description;
+    protected boolean completed;
+    protected final String description;
 
     public Task(String description) {
         this.description = description;
         this.completed = false;
     }
+
+    public Task(String description, boolean completed) {
+        this.description = description;
+        this.completed = completed;
+    }
+
+    public abstract String toCsv();
 
     public void mark() {
         this.completed = true;
