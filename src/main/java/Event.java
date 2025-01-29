@@ -1,14 +1,16 @@
-public class Event extends Task {
-    private String from;
-    private String to;
+import java.time.LocalDateTime;
 
-    public Event (String description, String from, String to) {
+public class Event extends Task {
+    private LocalDateTime from;
+    private LocalDateTime to;
+
+    public Event (String description, LocalDateTime from, LocalDateTime to) {
         super(description);
         this.from = from;
         this.to = to;
     }
 
-    public Event(String description, String from, String to, boolean completed) {
+    public Event(String description, LocalDateTime from, LocalDateTime to, boolean completed) {
         super(description, completed);
         this.from = from;
         this.to = to;
@@ -16,11 +18,15 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
+        String fromReadable = Helper.datetimeToReadable(this.from);
+        String toReadable = Helper.datetimeToReadable(this.to);
+        return "[E]" + super.toString() + " (from: " + fromReadable + " to: " + toReadable + ")";
     }
 
     @Override
     public String toCsv() {
-        return String.format("E,%s,%b,,%s,%s", this.description, this.completed, this.from, this.to);
+        String fromReadable = Helper.datetimeToReadable(this.from);
+        String toReadable = Helper.datetimeToReadable(this.to);
+        return String.format("E,%s,%b,,%s,%s", this.description, this.completed, fromReadable, toReadable);
     }
 }
