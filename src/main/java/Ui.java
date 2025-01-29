@@ -34,8 +34,9 @@ public class Ui {
         System.out.println("\t" + LINE);
     }
 
-    public void printLogo() {
+    public void printWelcome() {
         System.out.println(LOGO);
+        this.print("Hello! I'm Bob!", "What can I do for you?");
     }
 
     public void printTasks(List<Task> tasks) {

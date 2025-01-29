@@ -5,14 +5,12 @@ public class Bob {
     public static void main(String[] args) {
 
         Ui ui = new Ui();
-
-        ui.printLogo();
-        ui.print("Hello! I'm Bob!", "What can I do for you?");
+        ui.printWelcome();
 
         while (true) {
             try {
                 String userInput = ui.readCommand();
-            
+                
                 // exit
                 if (userInput.trim().equals("bye")) {
                     break;
