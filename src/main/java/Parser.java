@@ -6,6 +6,11 @@ public class Parser {
         if (userInput.equals("bye")) {
             return new ExitCommand();
         }
+
+        if (userInput.equals("list")) {
+            return new ListCommand();
+        }
+
         throw new WrongCommandException("Unrecognised command!");
     }
 }
