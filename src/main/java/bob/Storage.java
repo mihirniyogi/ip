@@ -10,6 +10,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import bob.task.Deadline;
+import bob.task.Event;
+import bob.task.Task;
+import bob.task.Todo;
+
 public class Storage {
     private static final String FILE_NAME = "tasks.csv";
     private static final Path FILE_PATH = Paths.get(System.getProperty("user.home"), FILE_NAME);

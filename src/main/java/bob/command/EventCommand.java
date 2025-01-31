@@ -2,9 +2,9 @@ package bob.command;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-import bob.Event;
-import bob.TaskList;
 import bob.Ui;
+import bob.task.Event;
+import bob.task.TaskList;
 
 public class EventCommand extends Command {
     

@@ -1,7 +1,7 @@
 package bob.command;
 
-import bob.TaskList;
 import bob.Ui;
+import bob.task.TaskList;
 
 public class ListCommand extends Command {
     @Override

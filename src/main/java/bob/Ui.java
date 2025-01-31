@@ -2,6 +2,8 @@ package bob;
 import java.util.List;
 import java.util.Scanner;
 
+import bob.task.Task;
+
 public class Ui {
     private static final String LINE = "____________________________________________________________";
     private static final String LOGO = """
