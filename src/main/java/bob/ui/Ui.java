@@ -1,5 +1,8 @@
+package bob.ui;
 import java.util.List;
 import java.util.Scanner;
+
+import bob.task.Task;
 
 public class Ui {
     private static final String LINE = "____________________________________________________________";

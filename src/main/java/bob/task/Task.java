@@ -1,3 +1,4 @@
+package bob.task;
 public abstract class Task {
     protected boolean completed;
     protected final String description;

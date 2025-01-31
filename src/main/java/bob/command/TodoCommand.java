@@ -1,20 +1,24 @@
+package bob.command;
 import java.io.IOException;
-import java.time.LocalDateTime;
 
-public class EventCommand extends Command {
+import bob.task.TaskList;
+import bob.task.Todo;
+import bob.ui.Ui;
+
+public class TodoCommand extends Command {
     
-    private Event event;
+    private Todo todo;
 
-    public EventCommand(String description, LocalDateTime from, LocalDateTime to) {
-        this.event = new Event(description, from, to);
+    public TodoCommand(String description) {
+        this.todo = new Todo(description);
     }
     
     @Override
     public void execute(Ui ui) {
         try {
-            TaskList.addTask(this.event);
+            TaskList.addTask(this.todo);
             ui.print("Bob is on it! I've added this task:", 
-                    this.event.toString(), 
+                    this.todo.toString(), 
                     "Now you have " + TaskList.getCount() + " task(s).");
         } catch (IOException e) {
             ui.print("Uh oh! Bob says...I couldn't save the task to the file.");

@@ -1,3 +1,4 @@
+package bob.command;
 
 
 public class WrongCommandException extends Exception {

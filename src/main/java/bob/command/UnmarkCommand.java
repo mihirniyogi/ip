@@ -1,18 +1,22 @@
+package bob.command;
 import java.io.IOException;
 
-public class MarkCommand extends Command {
+import bob.task.TaskList;
+import bob.ui.Ui;
+
+public class UnmarkCommand extends Command {
     
     private int number;
 
-    public MarkCommand(int number) {
+    public UnmarkCommand(int number) {
         this.number = number;
     }
     
     @Override
     public void execute(Ui ui) {
         try {
-            TaskList.markTask(number);
-            ui.print("Bob is on it! Marked the following as done [X]:", 
+            TaskList.unmarkTask(number);
+            ui.print("Bob is on it! Marked the following as undone [ ]", 
                     TaskList.getTask(number).toString());
         } catch (IndexOutOfBoundsException e) {
             ui.print("Uh oh! Bob says...the task number does not exist.");
