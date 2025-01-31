@@ -21,6 +21,15 @@ public class Parser {
             return new UnmarkCommand(number);
         }
 
+        if (userInput.startsWith("todo")) {
+            String[] parts = userInput.split(" ", 2);
+            if (parts.length == 1 || parts[1].isBlank()) {
+                throw new WrongCommandException("Uh oh! Bob says...the description of a todo cannot be empty.");
+            }
+            String description = parts[1];            
+            return new TodoCommand(description);
+        }
+
 
         throw new WrongCommandException("Unrecognised command!");
     }
