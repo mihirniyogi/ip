@@ -45,6 +45,29 @@ public class Parser {
             return new DeadlineCommand(description, by); 
         }
 
+        if (userInput.startsWith("event")) {
+            String[] command = userInput.split(" ", 2);
+            if (command.length == 1 || command[1].isBlank()) {
+                throw new WrongCommandException("Uh oh! Bob says...the description of an event cannot be empty.");
+            }
+            String[] parts = command[1].split(" /from ");
+            if (parts.length == 1 || parts[1].isBlank()) {
+                throw new WrongCommandException("Uh oh! Bob says...an event task needs a '/from' and '/to'. e.g. event project meeting /from 17/04/2025 1400 /to 17/04/2025 1600");
+            }
+            String description = parts[0];
+            String[] dates = parts[1].split(" /to ");
+            if (dates.length == 1 || dates[1].isBlank()) {
+                throw new WrongCommandException("Uh oh! Bob says...an event task needs a '/to'. e.g. event project meeting /from 17/04/2025 1400 /to 17/04/2025 1600");
+            }
+            String fromInput = dates[0];
+            String toInput = dates[1];
+
+            LocalDateTime from = Helper.inputToDateTime(fromInput);
+            LocalDateTime to = Helper.inputToDateTime(toInput);   
+            
+            return new EventCommand(description, from, to);
+        }
+
 
         throw new WrongCommandException("Unrecognised command!");
     }
