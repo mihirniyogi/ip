@@ -16,6 +16,11 @@ public class Parser {
             return new MarkCommand(number);
         }
 
+        if (userInput.startsWith("unmark")) {
+            int number = Integer.parseInt(userInput.split(" ")[1]);
+            return new UnmarkCommand(number);
+        }
+
 
         throw new WrongCommandException("Unrecognised command!");
     }
