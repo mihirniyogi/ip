@@ -21,7 +21,6 @@ public class Deadline extends Task {
 
     @Override
     public String toCsv() {
-        String byReadable = Helper.datetimeToReadable(this.by);
-        return String.format("D,%s,%b,%s,,", this.description, this.completed, byReadable);
+        return String.format("D,%s,%b,%s,,", this.description, this.completed, this.by);
     }
 }
