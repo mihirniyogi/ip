@@ -1,8 +1,8 @@
 package bob.command;
 import java.io.IOException;
 
-import bob.Ui;
 import bob.task.TaskList;
+import bob.ui.Ui;
 
 public class UnmarkCommand extends Command {
     

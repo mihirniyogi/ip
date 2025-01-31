@@ -1,9 +1,9 @@
 package bob.command;
 import java.io.IOException;
 
-import bob.Ui;
 import bob.task.TaskList;
 import bob.task.Todo;
+import bob.ui.Ui;
 
 public class TodoCommand extends Command {
     

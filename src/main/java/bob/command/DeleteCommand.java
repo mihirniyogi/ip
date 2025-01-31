@@ -1,9 +1,9 @@
 package bob.command;
 import java.io.IOException;
 
-import bob.Ui;
 import bob.task.Task;
 import bob.task.TaskList;
+import bob.ui.Ui;
 
 public class DeleteCommand extends Command {
 

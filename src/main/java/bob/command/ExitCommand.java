@@ -1,6 +1,6 @@
 package bob.command;
 
-import bob.Ui;
+import bob.ui.Ui;
 
 public class ExitCommand extends Command {
     @Override

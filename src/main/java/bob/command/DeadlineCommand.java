@@ -2,9 +2,9 @@ package bob.command;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-import bob.Ui;
 import bob.task.Deadline;
 import bob.task.TaskList;
+import bob.ui.Ui;
 
 public class DeadlineCommand extends Command {
     
