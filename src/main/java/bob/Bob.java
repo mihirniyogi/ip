@@ -1,6 +1,9 @@
 package bob;
 import java.io.IOException;
 
+import bob.command.Command;
+import bob.command.WrongCommandException;
+
 public class Bob {
     public static void main(String[] args) {
 

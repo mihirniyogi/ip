@@ -1,4 +1,7 @@
-package bob;
+package bob.command;
+
+import bob.Ui;
+
 public class ExitCommand extends Command {
     @Override
     public void execute(Ui ui) {
