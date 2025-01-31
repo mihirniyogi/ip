@@ -11,6 +11,12 @@ public class Parser {
             return new ListCommand();
         }
 
+        if (userInput.startsWith("mark")) {
+            int number = Integer.parseInt(userInput.split(" ")[1]);
+            return new MarkCommand(number);
+        }
+
+
         throw new WrongCommandException("Unrecognised command!");
     }
 }
