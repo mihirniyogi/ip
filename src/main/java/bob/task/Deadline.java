@@ -1,7 +1,7 @@
 package bob.task;
 import java.time.LocalDateTime;
 
-import bob.Helper;
+import bob.util.Helper;
 
 public class Deadline extends Task {
     private LocalDateTime by;
