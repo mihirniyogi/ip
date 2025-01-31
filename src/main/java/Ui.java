@@ -20,7 +20,7 @@ public class Ui {
     }
 
     public String readCommand() {
-        return scanner.nextLine();
+        return scanner.nextLine().trim();
     }
 
     public void print(String... inputs) {
