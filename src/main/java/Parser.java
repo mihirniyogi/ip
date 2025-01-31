@@ -30,6 +30,21 @@ public class Parser {
             return new TodoCommand(description);
         }
 
+        if (userInput.startsWith("deadline")) {
+            String[] command = userInput.split(" ", 2);
+            if (command.length == 1 || command[1].isBlank()) {
+                throw new WrongCommandException("Uh oh! Bob says...the description of a deadline cannot be empty.");
+            }
+            String[] parts = command[1].split(" /by ");
+            if (parts.length == 1 || parts[1].isBlank()) {
+                throw new WrongCommandException("Uh oh! Bob says...a deadline task needs a '/by'. e.g. deadline return book /by 18/02/2025 1800");
+            }
+            String description = parts[0];
+            String byInput = parts[1];                    
+            LocalDateTime by = Helper.inputToDateTime(byInput);
+            return new DeadlineCommand(description, by); 
+        }
+
 
         throw new WrongCommandException("Unrecognised command!");
     }
