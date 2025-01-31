@@ -68,6 +68,10 @@ public class Parser {
             return new EventCommand(description, from, to);
         }
 
+        if (userInput.startsWith("delete")) {
+            int number = Integer.parseInt(userInput.split(" ")[1]);
+            return new DeleteCommand(number);
+        }
 
         throw new WrongCommandException("Unrecognised command!");
     }
