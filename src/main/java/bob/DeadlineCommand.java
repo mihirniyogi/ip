@@ -1,20 +1,21 @@
+package bob;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-public class EventCommand extends Command {
+public class DeadlineCommand extends Command {
     
-    private Event event;
+    private Deadline deadline;
 
-    public EventCommand(String description, LocalDateTime from, LocalDateTime to) {
-        this.event = new Event(description, from, to);
+    public DeadlineCommand(String description, LocalDateTime by) {
+        this.deadline = new Deadline(description, by);
     }
     
     @Override
     public void execute(Ui ui) {
         try {
-            TaskList.addTask(this.event);
+            TaskList.addTask(this.deadline);
             ui.print("Bob is on it! I've added this task:", 
-                    this.event.toString(), 
+                    this.deadline.toString(), 
                     "Now you have " + TaskList.getCount() + " task(s).");
         } catch (IOException e) {
             ui.print("Uh oh! Bob says...I couldn't save the task to the file.");
