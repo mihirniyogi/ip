@@ -25,17 +25,17 @@ public class TaskList {
         Storage.saveTasksToFile(tasks);
     }
 
-    public static void deleteTask(int number) throws IOException {
+    public static void deleteTask(int number) throws IOException, IndexOutOfBoundsException {
         tasks.remove(number - 1);
         Storage.saveTasksToFile(tasks);
     }
 
-    public static void markTask(int number) throws IOException {
+    public static void markTask(int number) throws IOException, IndexOutOfBoundsException {
         tasks.get(number - 1).mark();
         Storage.saveTasksToFile(tasks);
     }
 
-    public static void unmarkTask(int number) throws IOException {
+    public static void unmarkTask(int number) throws IOException, IndexOutOfBoundsException {
         tasks.get(number - 1).unmark();
         Storage.saveTasksToFile(tasks);
     }
