@@ -3,6 +3,7 @@ import java.io.IOException;
 
 import bob.command.Command;
 import bob.command.WrongCommandException;
+import bob.parser.Parser;
 
 public class Bob {
     public static void main(String[] args) {

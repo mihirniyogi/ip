@@ -1,7 +1,8 @@
-package bob;
+package bob.parser;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
+import bob.Helper;
 import bob.command.Command;
 import bob.command.DeadlineCommand;
 import bob.command.DeleteCommand;
