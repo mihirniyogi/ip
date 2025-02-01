@@ -38,7 +38,6 @@ public class Storage {
         if (!Files.exists(FILE_PATH)) {
             try {
                 Files.createFile(FILE_PATH);
-                
                 Files.write(FILE_PATH, HEADER.getBytes(StandardCharsets.UTF_8), StandardOpenOption.WRITE);
             } catch (IOException e) {
                 System.err.println("Error creating file: " + e.getMessage());
@@ -46,6 +45,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Helper method that converts a line from the CSV file to a Task object.
+     * 
+     * @param line String.
+     * @return Task object.
+     * @throws IllegalArgumentException if the task type is not from {T,D,E}.
+     */
     private static Task convertLineToTask(String line) throws IllegalArgumentException {
         String[] fields = line.split(",");
         String type = fields[1];
@@ -76,6 +82,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Fetches tasks from the file and returns them as a list.
+     * Returns empty list if encountered any IO error.
+     * 
+     * @return List of tasks.
+     */
     public static List<Task> fetchTasksFromFile() {
         try {
             List<Task> tasks = Files.lines(FILE_PATH)
@@ -89,6 +101,14 @@ public class Storage {
         }
     }
     
+    /**
+     * Saves the given list of tasks to the file.
+     * Note that this method re-writes the CSV file entirely, 
+     * every time it is called.
+     * 
+     * @param tasks List.
+     * @throws IOException if error during file IO.
+     */
     public static void saveTasksToFile(List<Task> tasks) throws IOException {
         String lines = Stream.concat(Stream.of(HEADER), 
                 tasks

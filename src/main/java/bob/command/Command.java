@@ -8,5 +8,11 @@ import bob.ui.Ui;
  * by its <i>many</i> subclasses.
  */
 public abstract class Command {
+    /**
+     * Executes the command. 
+     * Uses the {@code Ui} object to interact with the user, if applicable.
+     * 
+     * @param ui instance.
+     */
     public abstract void execute(Ui ui);
 }

@@ -10,22 +10,41 @@ import bob.util.Helper;
 public class Deadline extends Task {
     private LocalDateTime by;
 
+    /**
+     * Constructs a new Deadline object with the given description and 'by' datetime.
+     * 
+     * @param description String.
+     * @param by dateTime object.
+     */
     public Deadline(String description, LocalDateTime by) {
         super(description);
         this.by = by;
     }
 
+    /**
+     * Constructs a new Deadline object with the given description, 'by' datetime and completed status.
+     * 
+     * @param description String.
+     * @param by dateTime object.
+     * @param completed Boolean.
+     */
     public Deadline(String description, LocalDateTime by, boolean completed) {
         super(description, completed);
         this.by = by;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         String byReadable = Helper.datetimeToReadable(this.by);
         return "[D]" + super.toString() + " (" + "by: " + byReadable + ")";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toCsv() {
         return String.format("D,%s,%b,%s,,", this.description, this.completed, this.by);

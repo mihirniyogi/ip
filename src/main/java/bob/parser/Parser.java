@@ -19,6 +19,15 @@ import bob.util.Helper;
  * throw exceptions if necessary, and return the respective commands.
  */
 public class Parser {
+    
+    /**
+     * Parses the user input and returns the respective command.
+     * 
+     * @param userInput String.
+     * @return Command object.
+     * @throws WrongCommandException if the user input is invalid.
+     * @throws IOException if there is an error saving to file.
+     */
     public static Command parse(String userInput) throws WrongCommandException, IOException {
         if (userInput.equals("bye")) {
             return new ExitCommand();
