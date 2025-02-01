@@ -7,6 +7,7 @@ import bob.command.DeadlineCommand;
 import bob.command.DeleteCommand;
 import bob.command.EventCommand;
 import bob.command.ExitCommand;
+import bob.command.FindCommand;
 import bob.command.ListCommand;
 import bob.command.MarkCommand;
 import bob.command.TodoCommand;
@@ -45,6 +46,18 @@ public class Parser {
         if (userInput.startsWith("unmark")) {
             int number = Integer.parseInt(userInput.split(" ")[1]);
             return new UnmarkCommand(number);
+        }
+
+        if (userInput.startsWith("find")) {
+            String[] parts = userInput.split(" ");
+            if (parts.length == 1) {
+                throw new WrongCommandException("Uh oh! Bob says...the search term cannot be empty.");
+            }
+            if (parts.length > 2) {
+                throw new WrongCommandException("Uh oh! Bob says...the search term must only be 1 word.");
+            }
+            String searchTerm = parts[1];
+            return new FindCommand(searchTerm);
         }
 
         if (userInput.startsWith("todo")) {
