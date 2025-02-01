@@ -1,6 +1,7 @@
 package bob.task;
 
 import java.time.LocalDateTime;
+
 import bob.util.Helper;
 
 /**
@@ -12,7 +13,7 @@ public class Deadline extends Task {
 
     /**
      * Constructs a new Deadline object with the given description and 'by' datetime.
-     * 
+     *
      * @param description String.
      * @param by dateTime object.
      */
@@ -23,7 +24,7 @@ public class Deadline extends Task {
 
     /**
      * Constructs a new Deadline object with the given description, 'by' datetime and completed status.
-     * 
+     *
      * @param description String.
      * @param by dateTime object.
      * @param completed Boolean.

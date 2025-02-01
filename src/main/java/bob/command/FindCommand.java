@@ -10,7 +10,7 @@ import bob.ui.Ui;
  * This class represents a command to find tasks that contain a search term.
  */
 public class FindCommand extends Command {
-    
+
     private String searchTerm;
 
     public FindCommand(String searchTerm) {
@@ -23,6 +23,6 @@ public class FindCommand extends Command {
         List<Task> filteredTasks = tasks.stream()
                 .filter(task -> task.toString().contains(this.searchTerm))
                 .toList();
-        ui.printTasks(filteredTasks);        
+        ui.printTasks(filteredTasks);
     }
 }

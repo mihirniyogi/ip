@@ -1,6 +1,7 @@
 package bob;
 
 import java.io.IOException;
+
 import bob.command.Command;
 import bob.command.WrongCommandException;
 import bob.parser.Parser;
@@ -30,7 +31,7 @@ public class Bob {
                 String userInput = ui.readCommand();
                 Command c = Parser.parse(userInput);
                 c.execute(ui);
-                
+
             } catch (WrongCommandException e) {
                 ui.print(e.getMessage(), "Please try again!");
             } catch (IndexOutOfBoundsException e) {
@@ -39,7 +40,7 @@ public class Bob {
                 ui.print("Uh oh! Bob says...I'm sorry, there is no such task :(");
             } catch (IOException e) {
                 ui.print("Uh oh! Bob says...I'm sorry, there was an error saving the task :(");
-            }   
+            }
         }
     }
 }

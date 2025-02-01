@@ -10,14 +10,15 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
 import bob.task.Deadline;
 import bob.task.Event;
 import bob.task.Task;
 import bob.task.Todo;
 
 /**
- * This class represents the storage of tasks. 
- * It contains static methods to fetch and save tasks to a CSV file 
+ * This class represents the storage of tasks.
+ * It contains static methods to fetch and save tasks to a CSV file
  * on the user's home directory.
  * This includes:
  * <ul>
@@ -47,7 +48,7 @@ public class Storage {
 
     /**
      * Helper method that converts a line from the CSV file to a Task object.
-     * 
+     *
      * @param line String.
      * @return Task object.
      * @throws IllegalArgumentException if the task type is not from {T,D,E}.
@@ -63,18 +64,18 @@ public class Storage {
             return new Todo(description, done);
         case "D":
             String byString = fields[4];
-            LocalDateTime by = byString.isBlank() 
-                    ? null 
+            LocalDateTime by = byString.isBlank()
+                    ? null
                     : LocalDateTime.parse(byString);
             return new Deadline(description, by, done);
         case "E":
             String fromString = fields[5];
             String toString = fields[6];
-            LocalDateTime from = fromString.isBlank() 
-                    ? null 
+            LocalDateTime from = fromString.isBlank()
+                    ? null
                     : LocalDateTime.parse(fromString);
-            LocalDateTime to = toString.isBlank() 
-                    ? null 
+            LocalDateTime to = toString.isBlank()
+                    ? null
                     : LocalDateTime.parse(toString);
             return new Event(description, from, to, done);
         default:
@@ -85,7 +86,7 @@ public class Storage {
     /**
      * Fetches tasks from the file and returns them as a list.
      * Returns empty list if encountered any IO error.
-     * 
+     *
      * @return List of tasks.
      */
     public static List<Task> fetchTasksFromFile() {
@@ -100,17 +101,17 @@ public class Storage {
             return List.of();
         }
     }
-    
+
     /**
      * Saves the given list of tasks to the file.
-     * Note that this method re-writes the CSV file entirely, 
+     * Note that this method re-writes the CSV file entirely,
      * every time it is called.
-     * 
+     *
      * @param tasks List.
      * @throws IOException if error during file IO.
      */
     public static void saveTasksToFile(List<Task> tasks) throws IOException {
-        String lines = Stream.concat(Stream.of(HEADER), 
+        String lines = Stream.concat(Stream.of(HEADER),
                 tasks
                     .stream()
                     .map(task -> (tasks.indexOf(task) + 1) + "," + task.toCsv()))
