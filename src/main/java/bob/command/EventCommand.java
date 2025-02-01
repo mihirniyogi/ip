@@ -1,11 +1,14 @@
 package bob.command;
+
 import java.io.IOException;
 import java.time.LocalDateTime;
-
 import bob.task.Event;
 import bob.task.TaskList;
 import bob.ui.Ui;
 
+/**
+ * This class represents a command to add an event task.
+ */
 public class EventCommand extends Command {
     
     private Event event;

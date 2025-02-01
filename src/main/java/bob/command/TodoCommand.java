@@ -1,10 +1,13 @@
 package bob.command;
-import java.io.IOException;
 
+import java.io.IOException;
 import bob.task.TaskList;
 import bob.task.Todo;
 import bob.ui.Ui;
 
+/**
+ * This class represents a command to add a todo task.
+ */
 public class TodoCommand extends Command {
     
     private Todo todo;

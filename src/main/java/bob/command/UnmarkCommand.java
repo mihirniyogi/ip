@@ -1,9 +1,12 @@
 package bob.command;
-import java.io.IOException;
 
+import java.io.IOException;
 import bob.task.TaskList;
 import bob.ui.Ui;
 
+/**
+ * This class represents a command to unmark a task, i.e. not completed.
+ */
 public class UnmarkCommand extends Command {
     
     private int number;

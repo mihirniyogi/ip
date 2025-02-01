@@ -1,9 +1,12 @@
 package bob.command;
-import java.io.IOException;
 
+import java.io.IOException;
 import bob.task.TaskList;
 import bob.ui.Ui;
 
+/**
+ * This class represents a command to mark a task as completed.
+ */
 public class MarkCommand extends Command {
     
     private int number;
