@@ -1,8 +1,12 @@
 package bob.task;
-import java.time.LocalDateTime;
 
+import java.time.LocalDateTime;
 import bob.util.Helper;
 
+/**
+ * This class represents an event task (inherits from Task).
+ * An event task has a description, a 'from' datetime and a 'to' datetime.
+ */
 public class Event extends Task {
     private LocalDateTime from;
     private LocalDateTime to;

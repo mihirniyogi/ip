@@ -1,4 +1,5 @@
 package bob.storage;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -9,12 +10,21 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import bob.task.Deadline;
 import bob.task.Event;
 import bob.task.Task;
 import bob.task.Todo;
 
+/**
+ * This class represents the storage of tasks. 
+ * It contains static methods to fetch and save tasks to a CSV file 
+ * on the user's home directory.
+ * This includes:
+ * <ul>
+ *    <li> {@link #fetchTasksFromFile()} </li>
+ *   <li> {@link #saveTasksToFile(List)} </li>
+ * </ul>
+ */
 public class Storage {
     private static final String FILE_NAME = "tasks.csv";
     private static final Path FILE_PATH = Paths.get(System.getProperty("user.home"), FILE_NAME);

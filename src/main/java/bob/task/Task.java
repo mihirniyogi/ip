@@ -1,4 +1,12 @@
 package bob.task;
+
+/**
+ * This class represents a task object.
+ * A task object has a description and a completed status.
+ * 
+ * Subclasses should implement the toCsv method to convert the task to a 
+ * CSV string.
+ */
 public abstract class Task {
     protected boolean completed;
     protected final String description;

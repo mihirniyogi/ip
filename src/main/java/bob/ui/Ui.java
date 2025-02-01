@@ -4,6 +4,9 @@ import java.util.Scanner;
 
 import bob.task.Task;
 
+/**
+ * This class deals with user interactions, both input and output.
+ */
 public class Ui {
     private static final String LINE = "____________________________________________________________";
     private static final String LOGO = """

@@ -1,11 +1,14 @@
 package bob.command;
+
 import java.io.IOException;
 import java.time.LocalDateTime;
-
 import bob.task.Deadline;
 import bob.task.TaskList;
 import bob.ui.Ui;
 
+/**
+ * This class represents a command to add a deadline task.
+ */
 public class DeadlineCommand extends Command {
     
     private Deadline deadline;

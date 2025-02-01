@@ -1,4 +1,8 @@
 package bob.task;
+
+/**
+ * This class represents a todo task (inherits from Task).
+ */
 public class Todo extends Task {
     public Todo (String description) {
         super(description);

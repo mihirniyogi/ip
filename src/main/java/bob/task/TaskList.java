@@ -4,6 +4,19 @@ import java.util.List;
 
 import bob.storage.Storage;
 
+/**
+ * This class represents a list of tasks. It contains static, 
+ * methods to manipulate the task list such as:
+ * <ul> 
+ *     <li> {@link #getCount()} </li>
+ *     <li> {@link #getTask(int)} </li>
+ *     <li> {@link #getTasks()} </li>
+ *     <li> {@link #addTask(Task)} </li>
+ *     <li> {@link #deleteTask(int)} </li>
+ *     <li> {@link #markTask(int)} </li>
+ *     <li> {@link #unmarkTask(int)} </li>
+ * </ul>
+ */
 public class TaskList {
     private static List<Task> tasks;
 

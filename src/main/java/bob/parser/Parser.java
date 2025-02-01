@@ -1,7 +1,7 @@
 package bob.parser;
+
 import java.io.IOException;
 import java.time.LocalDateTime;
-
 import bob.command.Command;
 import bob.command.DeadlineCommand;
 import bob.command.DeleteCommand;
@@ -14,6 +14,10 @@ import bob.command.UnmarkCommand;
 import bob.command.WrongCommandException;
 import bob.util.Helper;
 
+/**
+ * This class contains a singular {@code parse()} method to parse and validate user input,
+ * throw exceptions if necessary, and return the respective commands.
+ */
 public class Parser {
     public static Command parse(String userInput) throws WrongCommandException, IOException {
         if (userInput.equals("bye")) {

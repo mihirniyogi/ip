@@ -1,8 +1,12 @@
 package bob.task;
-import java.time.LocalDateTime;
 
+import java.time.LocalDateTime;
 import bob.util.Helper;
 
+/**
+ * This class represents a deadline task (inherits from Task).
+ * A deadline task has a description and a 'by' datetime, indicating its due date.
+ */
 public class Deadline extends Task {
     private LocalDateTime by;
 
