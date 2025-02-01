@@ -30,7 +30,7 @@ public class Ui {
 
     /**
      * Reads the next command from the user.
-     * 
+     *
      * @return trimmed version of the user input (String)
      */
     public String readCommand() {
@@ -39,18 +39,18 @@ public class Ui {
 
     /**
      * Accepts multiple strings as input, and
-     * prints the given inputs line by line. 
+     * prints the given inputs line by line.
      * Will print a separation line before and after the inputs.
-     * 
+     *
      * @param inputs String array.
      */
     public void print(String... inputs) {
         System.out.println("\t" + LINE);
         for (String input: inputs) {
             if (input == null) {
-            continue;
-        }
-        System.out.println("\t" + input);
+                continue;
+            }
+            System.out.println("\t" + input);
         }
         System.out.println("\t" + LINE);
     }
@@ -65,7 +65,7 @@ public class Ui {
 
     /**
      * Prints the list of newline-separated, nicely formatted tasks in the task list.
-     * 
+     *
      * @param tasks List.
      */
     public void printTasks(List<Task> tasks) {

@@ -9,9 +9,9 @@ import bob.ui.Ui;
  */
 public abstract class Command {
     /**
-     * Executes the command. 
+     * Executes the command.
      * Uses the {@code Ui} object to interact with the user, if applicable.
-     * 
+     *
      * @param ui instance.
      */
     public abstract void execute(Ui ui);

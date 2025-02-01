@@ -1,6 +1,7 @@
 package bob.task;
 
 import java.time.LocalDateTime;
+
 import bob.util.Helper;
 
 /**
@@ -13,12 +14,12 @@ public class Event extends Task {
 
     /**
      * Constructs a new Event object with the given description, 'from' datetime and 'to' datetime.
-     * 
+     *
      * @param description String.
      * @param from dateTime object.
      * @param to dateTime object.
      */
-    public Event (String description, LocalDateTime from, LocalDateTime to) {
+    public Event(String description, LocalDateTime from, LocalDateTime to) {
         super(description);
         this.from = from;
         this.to = to;
@@ -26,7 +27,7 @@ public class Event extends Task {
 
     /**
      * Constructs a new Event object with the given description, 'from' datetime, 'to' datetime and completed status.
-     * 
+     *
      * @param description String.
      * @param from dateTime object.
      * @param to dateTime object.

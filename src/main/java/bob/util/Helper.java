@@ -9,7 +9,7 @@ public class Helper {
 
     /**
      * Converts a LocalDateTime object to a readable string for output purposes.
-     * 
+     *
      * @param dateTime object.
      * @return String.
      */
@@ -20,7 +20,7 @@ public class Helper {
 
     /**
      * Converts user's input to a LocalDateTime object for storage purposes.
-     * 
+     *
      * @param input String.
      * @return LocalDateTime object.
      */
