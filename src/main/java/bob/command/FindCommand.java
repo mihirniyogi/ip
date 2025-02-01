@@ -6,6 +6,9 @@ import bob.task.Task;
 import bob.task.TaskList;
 import bob.ui.Ui;
 
+/**
+ * This class represents a command to find tasks that contain a search term.
+ */
 public class FindCommand extends Command {
     
     private String searchTerm;
