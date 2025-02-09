@@ -43,8 +43,25 @@ test {
     }
 }
 
+// Default task when run is called
+// ./gradlew run
 application {
     mainClass.set("bob.gui.Launcher")
+}
+
+// To run the CLI version of this app
+// ./gradlew runcli
+task runcli(type: JavaExec) {
+    main = 'bob.Bob'
+    classpath = sourceSets.main.runtimeClasspath
+    standardInput = System.in
+}
+
+// To run the GUI version of this app
+// ./gradlew rungui
+task rungui(type: JavaExec) {
+    main = 'bob.gui.Launcher'
+    classpath = sourceSets.main.runtimeClasspath
 }
 
 checkstyle {
@@ -54,8 +71,4 @@ checkstyle {
 shadowJar {
     archiveBaseName = "bob"
     archiveClassifier = null
-}
-
-run {
-    standardInput = System.in
 }
