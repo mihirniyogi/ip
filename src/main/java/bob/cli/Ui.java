@@ -1,8 +1,8 @@
-package bob.ui;
-import java.util.List;
+package bob.cli;
+
 import java.util.Scanner;
 
-import bob.task.Task;
+import bob.util.Formatter;
 
 /**
  * This class deals with user interactions, both input and output.
@@ -44,15 +44,11 @@ public class Ui {
      *
      * @param inputs String array.
      */
-    public void print(String... inputs) {
-        System.out.println("\t" + LINE);
-        for (String input: inputs) {
-            if (input == null) {
-                continue;
-            }
-            System.out.println("\t" + input);
-        }
-        System.out.println("\t" + LINE);
+    public void print(String s) {
+        StringBuilder tmp = new StringBuilder();
+        tmp.append("\t").append(LINE).append("\n").append(s).append("\n").append(LINE);
+        String output = tmp.toString().replaceAll("\n", "\n\t");
+        System.out.println(output);
     }
 
     /**
@@ -60,25 +56,7 @@ public class Ui {
      */
     public void printWelcome() {
         System.out.println(LOGO);
-        this.print("Hello! I'm Bob!", "What can I do for you?");
-    }
-
-    /**
-     * Prints the list of newline-separated, nicely formatted tasks in the task list.
-     *
-     * @param tasks List.
-     */
-    public void printTasks(List<Task> tasks) {
-        if (tasks.isEmpty()) {
-            this.print("No tasks yet!");
-            return;
-        }
-        int n = tasks.size();
-        String[] taskStrings = new String[n];
-        for (int i = 0; i < n; i++) {
-            taskStrings[i] = (i + 1) + ". " + tasks.get(i).toString();
-        }
-        this.print("Here are your tasks:", String.join("\n\t", taskStrings));
+        this.print(Formatter.format("Hello! I'm Bob!", "What can I do for you?"));
     }
 
     /**

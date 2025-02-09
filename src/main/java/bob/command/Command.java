@@ -1,7 +1,5 @@
 package bob.command;
 
-import bob.ui.Ui;
-
 /**
  * This class represents a command. It is an abstract class that
  * contains an abstract method {@code execute(Ui)} that is implemented
@@ -14,5 +12,5 @@ public abstract class Command {
      *
      * @param ui instance.
      */
-    public abstract void execute(Ui ui);
+    public abstract String execute();
 }

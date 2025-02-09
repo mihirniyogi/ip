@@ -1,15 +1,13 @@
 package bob.command;
 
-import bob.ui.Ui;
+import bob.util.Formatter;
 
 /**
  * This class represents a command to exit the program.
  */
 public class ExitCommand extends Command {
     @Override
-    public void execute(Ui ui) {
-        ui.print("Thank you and goodbye!");
-        ui.closeScanner();
-        System.exit(0);
+    public String execute() {
+        return Formatter.format("Thank you and goodbye!");
     }
 }
