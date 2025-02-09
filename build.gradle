@@ -52,7 +52,7 @@ application {
 // To run the CLI version of this app
 // ./gradlew runcli
 task runcli(type: JavaExec) {
-    main = 'bob.Bob'
+    main = 'bob.cli.Bob'
     classpath = sourceSets.main.runtimeClasspath
     standardInput = System.in
 }

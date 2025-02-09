@@ -1,4 +1,4 @@
-package bob;
+package bob.cli;
 
 import java.io.IOException;
 
@@ -6,7 +6,6 @@ import bob.command.Command;
 import bob.command.ExitCommand;
 import bob.command.WrongCommandException;
 import bob.parser.Parser;
-import bob.ui.Ui;
 import bob.util.Formatter;
 
 /**
@@ -43,11 +42,11 @@ public class Bob {
             } catch (WrongCommandException e) {
                 ui.print(Formatter.format(e.getMessage(), "Please try again!"));
             } catch (IndexOutOfBoundsException e) {
-                ui.print("Uh oh! Bob says...I'm sorry, there is no such task :(");
+                ui.print(Formatter.format("Uh oh! Bob says...I'm sorry, there is no such task :("));
             } catch (NumberFormatException e) {
-                ui.print("Uh oh! Bob says...I'm sorry, there is no such task :(");
+                ui.print(Formatter.format("Uh oh! Bob says...I'm sorry, there is no such task :("));
             } catch (IOException e) {
-                ui.print("Uh oh! Bob says...I'm sorry, there was an error saving the task :(");
+                ui.print(Formatter.format("Uh oh! Bob says...I'm sorry, there was an error saving the task :("));
             }
         }
     }

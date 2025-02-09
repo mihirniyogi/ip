@@ -1,4 +1,4 @@
-package bob.ui;
+package bob.cli;
 
 import java.util.Scanner;
 
@@ -45,9 +45,10 @@ public class Ui {
      * @param inputs String array.
      */
     public void print(String s) {
-        System.out.println("\t" + LINE);
-        System.out.println(s);
-        System.out.println("\t" + LINE);
+        StringBuilder tmp = new StringBuilder();
+        tmp.append("\t").append(LINE).append("\n").append(s).append("\n").append(LINE);
+        String output = tmp.toString().replaceAll("\n", "\n\t");
+        System.out.println(output);
     }
 
     /**
