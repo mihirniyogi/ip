@@ -9,10 +9,10 @@ import bob.task.Task;
  * for both CLI and GUI.
  */
 public class Formatter {
-    
+
     /**
      * Formats the given strings into a single multi-line string.
-     * 
+     *
      * @param inputs variable number of strings to be formatted.
      * @return single multi-line string.
      */
@@ -30,7 +30,7 @@ public class Formatter {
 
     /**
      * Formats the given list of tasks into a single multi-line string.
-     * 
+     *
      * @param tasks list of tasks to be formatted.
      * @return single multi-line string.
      */

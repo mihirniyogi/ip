@@ -14,10 +14,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * Controller for MainWindow. Provides the layout for the other controls.
+ */
 public class MainWindow extends AnchorPane {
+
+    private static final String WELCOME_MESSAGE = "Hello, I'm Bob. How can I help you today?";
+
     @FXML
     private ScrollPane scrollPane;
-    
+
     @FXML
     private VBox dialogContainer;
 
@@ -26,8 +32,6 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     private Button sendButton;
-
-    private static final String WELCOME_MESSAGE = "Hello, I'm Bob. How can I help you today?";
 
     /**
      * Method triggered by 'ENTER' keypress or Send button)
@@ -43,7 +47,7 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Returns the response from Bob based on the user input.
-     * 
+     *
      * @param input user's input.
      * @return String response from Bob.
      */
@@ -66,6 +70,10 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * Note that method is auto-called,
+     * We are doing additional setup here.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty()); // Auto-scroll to the bottom

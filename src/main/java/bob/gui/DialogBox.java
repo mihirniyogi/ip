@@ -19,6 +19,9 @@ import javafx.scene.layout.HBox;
  */
 public class DialogBox extends HBox {
 
+    private static final Image userImage = new Image(DialogBox.class.getResourceAsStream("/images/user.png"));
+    private static final Image bobImage = new Image(DialogBox.class.getResourceAsStream("/images/bob.png"));
+
     @FXML
     private HBox container;
 
@@ -28,15 +31,12 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private static final Image userImage = new Image(DialogBox.class.getResourceAsStream("/images/user.png"));
-    private static final Image bobImage = new Image(DialogBox.class.getResourceAsStream("/images/bob.png"));
-
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/DialogBox.fxml"));
             loader.setController(this);
             loader.setRoot(this);
-            loader.load();            
+            loader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -57,7 +57,7 @@ public class DialogBox extends HBox {
 
     /**
      * Returns a dialog box representing the user's message.
-     * 
+     *
      * @param text user's message.
      * @return DialogBox object.
      */
@@ -66,10 +66,10 @@ public class DialogBox extends HBox {
         db.setAlignment(Pos.TOP_RIGHT); // Align user dialog to the right
         return db;
     }
-    
+
     /**
      * Returns a dialog box representing Bob's message.
-     * 
+     *
      * @param text bob's message.
      * @return DialogBox object.
      */

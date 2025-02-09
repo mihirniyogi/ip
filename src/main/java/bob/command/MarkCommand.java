@@ -20,7 +20,6 @@ public class MarkCommand extends Command {
     public String execute() {
         try {
             TaskList.markTask(number);
-            
             String output = Formatter.format("Bob is on it! Marked the following as done [X]:",
                     TaskList.getTask(number).toString());
             return output;

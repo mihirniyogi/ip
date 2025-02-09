@@ -9,7 +9,7 @@ public abstract class Command {
 
     /**
      * Executes the command and returns the output.
-     * 
+     *
      * @return String output.
      */
     public abstract String execute();

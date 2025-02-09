@@ -22,7 +22,6 @@ public class DeadlineCommand extends Command {
     public String execute() {
         try {
             TaskList.addTask(this.deadline);
-            
             String output = Formatter.format("Bob is on it! I've added this task:",
                     this.deadline.toString(),
                     "Now you have " + TaskList.getCount() + " task(s).");
