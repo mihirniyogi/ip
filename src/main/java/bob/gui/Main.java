@@ -14,6 +14,7 @@ public class Main extends Application {
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = loader.load();  
             Scene scene = new Scene(ap);
+            scene.getStylesheets().add(Main.class.getResource("/view/styles.css").toExternalForm());
             primaryStage.setScene(scene);            
             primaryStage.setTitle("Bob");
             primaryStage.show();

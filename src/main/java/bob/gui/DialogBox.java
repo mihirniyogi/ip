@@ -15,7 +15,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 public class DialogBox extends HBox {
-    
+
+    @FXML
+    private HBox container;
+
     @FXML
     private Label dialog;
 
@@ -40,19 +43,23 @@ public class DialogBox extends HBox {
     }
 
     private void flip() {
-        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+        ObservableList<Node> tmp = FXCollections.observableArrayList(container.getChildren());
         Collections.reverse(tmp);
-        getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT); 
+        container.getChildren().setAll(tmp);
+        this.setAlignment(Pos.TOP_LEFT); // Align to the left after flipping
     }
 
     public static DialogBox getUserDialogBox(String text) {
-        return new DialogBox(text, userImage);
+        var db = new DialogBox(text, userImage);
+        db.setAlignment(Pos.TOP_RIGHT); // Align user dialog to the right
+        db.getStyleClass().add("user");
+        return db;
     }
-
+    
     public static DialogBox getBobDialogBox(String text) {
         var db = new DialogBox(text, bobImage);
-        db.flip();
+        db.flip(); // Flip Bob's dialog to align it to the left
+        
         return db;
     }
 }
