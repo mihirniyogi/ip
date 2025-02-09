@@ -32,6 +32,11 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    @FXML
+    public void initialize() {
+        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+    }
+
     public void setBob(Bob b) {
         this.bob = b;
     }

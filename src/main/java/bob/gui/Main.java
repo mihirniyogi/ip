@@ -18,7 +18,11 @@ public class Main extends Application {
             AnchorPane ap = loader.load();  
             Scene scene = new Scene(ap);
             primaryStage.setScene(scene);
-            loader.<MainWindow>getController().setBob(this.bob);
+            
+            MainWindow controller = loader.getController();
+            controller.setBob(this.bob);
+            controller.initialize();
+            
             primaryStage.setTitle("Bob");
             primaryStage.show();
         } catch (Exception e) {
