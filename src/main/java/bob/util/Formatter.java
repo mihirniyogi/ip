@@ -12,7 +12,7 @@ public class Formatter {
             if (input == null) {
                 continue;
             }
-            output.append("\t").append(input).append("\n");
+            output.append(input).append("\n");
         }
         output.setLength(output.length() - 1);
         return output.toString();
@@ -29,6 +29,6 @@ public class Formatter {
             taskStrings[i] = (i + 1) + ". " + tasks.get(i).toString();
         }
 
-        return format("Here are your tasks:", String.join("\n\t", taskStrings));
+        return format("Here are your tasks:", String.join("\n", taskStrings));
     }
 }
