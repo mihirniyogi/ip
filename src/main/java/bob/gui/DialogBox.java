@@ -22,6 +22,9 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    private static final Image userImage = new Image(DialogBox.class.getResourceAsStream("/images/user.png"));
+    private static final Image bobImage = new Image(DialogBox.class.getResourceAsStream("/images/bob.png"));
+
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/DialogBox.fxml"));
@@ -43,12 +46,12 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT); 
     }
 
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+    public static DialogBox getUserDialog(String text) {
+        return new DialogBox(text, userImage);
     }
 
-    public static DialogBox getBobDialogBox(String text, Image img) {
-        var db = new DialogBox(text, img);
+    public static DialogBox getBobDialogBox(String text) {
+        var db = new DialogBox(text, bobImage);
         db.flip();
         return db;
     }
