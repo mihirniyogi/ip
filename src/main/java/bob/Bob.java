@@ -3,9 +3,11 @@ package bob;
 import java.io.IOException;
 
 import bob.command.Command;
+import bob.command.ExitCommand;
 import bob.command.WrongCommandException;
 import bob.parser.Parser;
 import bob.ui.Ui;
+import bob.util.Formatter;
 
 /**
  * This class is the entry point of the Bob program.
@@ -30,10 +32,16 @@ public class Bob {
             try {
                 String userInput = ui.readCommand();
                 Command c = Parser.parse(userInput);
-                c.execute(ui);
 
+                String output = c.execute();
+                ui.print(output);
+
+                if (c instanceof ExitCommand) {
+                    ui.closeScanner();
+                    System.exit(0);
+                }
             } catch (WrongCommandException e) {
-                ui.print(e.getMessage(), "Please try again!");
+                ui.print(Formatter.format(e.getMessage(), "Please try again!"));
             } catch (IndexOutOfBoundsException e) {
                 ui.print("Uh oh! Bob says...I'm sorry, there is no such task :(");
             } catch (NumberFormatException e) {

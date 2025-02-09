@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 import bob.task.Event;
 import bob.task.TaskList;
-import bob.ui.Ui;
+import bob.util.Formatter;
 
 /**
  * This class represents a command to add an event task.
@@ -19,14 +19,15 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui) {
+    public String execute() {
         try {
             TaskList.addTask(this.event);
-            ui.print("Bob is on it! I've added this task:",
+            String output = Formatter.format("Bob is on it! I've added this task:",
                     this.event.toString(),
                     "Now you have " + TaskList.getCount() + " task(s).");
+            return output;
         } catch (IOException e) {
-            ui.print("Uh oh! Bob says...I couldn't save the task to the file.");
+            return "Uh oh! Bob says...I couldn't save the task to the file.";
         }
     }
 }

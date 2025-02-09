@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import bob.task.TaskList;
 import bob.task.Todo;
-import bob.ui.Ui;
+import bob.util.Formatter;
 
 /**
  * This class represents a command to add a todo task.
@@ -18,14 +18,15 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui) {
+    public String execute() {
         try {
             TaskList.addTask(this.todo);
-            ui.print("Bob is on it! I've added this task:",
+            String output = Formatter.format("Bob is on it! I've added this task:",
                     this.todo.toString(),
                     "Now you have " + TaskList.getCount() + " task(s).");
+            return output;
         } catch (IOException e) {
-            ui.print("Uh oh! Bob says...I couldn't save the task to the file.");
+            return "Uh oh! Bob says...I couldn't save the task to the file.";
         }
     }
 }

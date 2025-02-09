@@ -3,7 +3,7 @@ package bob.command;
 import java.io.IOException;
 
 import bob.task.TaskList;
-import bob.ui.Ui;
+import bob.util.Formatter;
 
 /**
  * This class represents a command to unmark a task, i.e. not completed.
@@ -17,15 +17,16 @@ public class UnmarkCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui) {
+    public String execute() {
         try {
             TaskList.unmarkTask(number);
-            ui.print("Bob is on it! Marked the following as undone [ ]",
+            String output = Formatter.format("Bob is on it! Marked the following as undone [ ]",
                     TaskList.getTask(number).toString());
+            return output;
         } catch (IndexOutOfBoundsException e) {
-            ui.print("Uh oh! Bob says...the task number does not exist.");
+            return "Uh oh! Bob says...the task number does not exist.";
         } catch (IOException e) {
-            ui.print("Uh oh! Bob says...I couldn't save the task to the file.");
+            return "Uh oh! Bob says...I couldn't save the task to the file.";
         }
     }
 }
