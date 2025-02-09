@@ -27,7 +27,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = input;
-        dialogContainer.getChildren().add(DialogBox.getUserDialog(input));
+        dialogContainer.getChildren().add(DialogBox.getUserDialogBox(input));
         dialogContainer.getChildren().add(DialogBox.getBobDialogBox(response));
         userInput.clear();
     }

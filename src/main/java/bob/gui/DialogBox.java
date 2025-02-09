@@ -46,7 +46,7 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT); 
     }
 
-    public static DialogBox getUserDialog(String text) {
+    public static DialogBox getUserDialogBox(String text) {
         return new DialogBox(text, userImage);
     }
 
