@@ -4,8 +4,18 @@ import java.util.List;
 
 import bob.task.Task;
 
+/**
+ * This class contains static methods to format strings,
+ * for both CLI and GUI.
+ */
 public class Formatter {
     
+    /**
+     * Formats the given strings into a single multi-line string.
+     * 
+     * @param inputs variable number of strings to be formatted.
+     * @return single multi-line string.
+     */
     public static String format(String... inputs) {
         StringBuilder output = new StringBuilder();
         for (String input: inputs) {
@@ -18,6 +28,12 @@ public class Formatter {
         return output.toString();
     }
 
+    /**
+     * Formats the given list of tasks into a single multi-line string.
+     * 
+     * @param tasks list of tasks to be formatted.
+     * @return single multi-line string.
+     */
     public static String formatTasks(List<Task> tasks) {
         if (tasks.isEmpty()) {
             return "No tasks yet!";

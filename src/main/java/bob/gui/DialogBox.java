@@ -14,6 +14,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * This class represents a dialog box to represent either user or Bob's message.
+ */
 public class DialogBox extends HBox {
 
     @FXML
@@ -42,6 +45,9 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
     }
 
+    /**
+     * Flips the dialog box such that the ImageView is on the left and text on the right.
+     */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(container.getChildren());
         Collections.reverse(tmp);
@@ -49,17 +55,27 @@ public class DialogBox extends HBox {
         this.setAlignment(Pos.TOP_LEFT); // Align to the left after flipping
     }
 
+    /**
+     * Returns a dialog box representing the user's message.
+     * 
+     * @param text user's message.
+     * @return DialogBox object.
+     */
     public static DialogBox getUserDialogBox(String text) {
         var db = new DialogBox(text, userImage);
         db.setAlignment(Pos.TOP_RIGHT); // Align user dialog to the right
-        db.getStyleClass().add("user");
         return db;
     }
     
+    /**
+     * Returns a dialog box representing Bob's message.
+     * 
+     * @param text bob's message.
+     * @return DialogBox object.
+     */
     public static DialogBox getBobDialogBox(String text) {
         var db = new DialogBox(text, bobImage);
         db.flip(); // Flip Bob's dialog to align it to the left
-        
         return db;
     }
 }

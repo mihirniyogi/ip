@@ -29,6 +29,9 @@ public class MainWindow extends AnchorPane {
 
     private static final String WELCOME_MESSAGE = "Hello, I'm Bob. How can I help you today?";
 
+    /**
+     * Method triggered by 'ENTER' keypress or Send button)
+     */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
@@ -38,6 +41,12 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    /**
+     * Returns the response from Bob based on the user input.
+     * 
+     * @param input user's input.
+     * @return String response from Bob.
+     */
     private String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
@@ -59,7 +68,7 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
-        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(DialogBox.getBobDialogBox(WELCOME_MESSAGE));
+        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty()); // Auto-scroll to the bottom
+        dialogContainer.getChildren().add(DialogBox.getBobDialogBox(WELCOME_MESSAGE)); // Starting message
     }
 }

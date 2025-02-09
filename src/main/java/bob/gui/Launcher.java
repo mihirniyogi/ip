@@ -3,7 +3,7 @@ package bob.gui;
 import javafx.application.Application;
 
 /**
- * A launcher class to workaround classpath issues.
+ * This class is the entry point of the Bob program (GUI).
  */
 public class Launcher {
     public static void main(String[] args) {

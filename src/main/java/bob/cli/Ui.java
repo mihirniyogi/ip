@@ -38,11 +38,10 @@ public class Ui {
     }
 
     /**
-     * Accepts multiple strings as input, and
-     * prints the given inputs line by line.
-     * Will print a separation line before and after the inputs.
+     * Accepts one string as input, and
+     * Will print a separation line before and after the input.
      *
-     * @param inputs String array.
+     * @param s String to be printed.
      */
     public void print(String s) {
         StringBuilder tmp = new StringBuilder();

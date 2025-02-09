@@ -9,12 +9,12 @@ import bob.parser.Parser;
 import bob.util.Formatter;
 
 /**
- * This class is the entry point of the Bob program.
+ * This class is the entry point of the Bob program (CLI).
  */
 public class Bob {
 
     /**
-     * Acts as main entry point of the application.
+     * Acts as main entry point of CLI application.
      * <p>
      * This method initializes the user interface, prints the welcome message,
      * and enters an infinite loop to read and process user commands.
