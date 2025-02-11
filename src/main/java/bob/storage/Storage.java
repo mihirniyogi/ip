@@ -111,10 +111,10 @@ public class Storage {
      * @throws IOException if error during file IO.
      */
     public static void saveTasksToFile(List<Task> tasks) throws IOException {
-        String lines = Stream.concat(Stream.of(HEADER),
-                tasks
-                    .stream()
-                    .map(task -> (tasks.indexOf(task) + 1) + "," + task.toCsv()))
+        String lines = Stream.concat(
+                Stream.of(HEADER),
+                tasks.stream().map(task -> (tasks.indexOf(task) + 1) + "," + task.toCsv())
+                )
                 .collect(Collectors.joining("\n"));
         Files.write(FILE_PATH, lines.getBytes(StandardCharsets.UTF_8), StandardOpenOption.TRUNCATE_EXISTING);
     }
