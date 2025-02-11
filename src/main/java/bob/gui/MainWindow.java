@@ -39,6 +39,13 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        assert input != "" : "Input should not be empty";
+
+        // Do nothing if input is empty
+        if (input.isBlank()) {
+            return;
+        }
+
         String response = getResponse(input);
         dialogContainer.getChildren().add(DialogBox.getUserDialogBox(input));
         dialogContainer.getChildren().add(DialogBox.getBobDialogBox(response));
@@ -54,7 +61,11 @@ public class MainWindow extends AnchorPane {
     private String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
+            assert c != null : "Command should not be null";
+
             String output = c.execute();
+            assert output != null : "Output should not be null";
+
             if (c instanceof ExitCommand) {
                 System.exit(0);
             }
