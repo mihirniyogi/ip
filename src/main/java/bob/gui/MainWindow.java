@@ -40,6 +40,12 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         assert input != "" : "Input should not be empty";
+
+        // Do nothing if input is empty
+        if (input.isBlank()) {
+            return;
+        }
+
         String response = getResponse(input);
         dialogContainer.getChildren().add(DialogBox.getUserDialogBox(input));
         dialogContainer.getChildren().add(DialogBox.getBobDialogBox(response));
