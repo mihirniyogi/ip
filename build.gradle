@@ -47,6 +47,7 @@ test {
 // ./gradlew run
 application {
     mainClass.set("bob.gui.Launcher")
+    applicationDefaultJvmArgs = ['-ea'] // Enable assertions
 }
 
 // To run the CLI version of this app
@@ -55,6 +56,7 @@ task runcli(type: JavaExec) {
     main = 'bob.cli.Bob'
     classpath = sourceSets.main.runtimeClasspath
     standardInput = System.in
+    jvmArgs = ['-ea'] // Enable assertions
 }
 
 // To run the GUI version of this app
@@ -62,6 +64,7 @@ task runcli(type: JavaExec) {
 task rungui(type: JavaExec) {
     main = 'bob.gui.Launcher'
     classpath = sourceSets.main.runtimeClasspath
+    jvmArgs = ['-ea'] // Enable assertions
 }
 
 checkstyle {
