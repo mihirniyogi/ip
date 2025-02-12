@@ -1,6 +1,13 @@
 name: Java CI
 
-on: [push, pull_request]
+# Trigger the workflow only on push or pull requests to the 'master' branch
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
   build:
@@ -10,25 +17,21 @@ jobs:
     runs-on: ${{ matrix.platform }}
 
     steps:
+      # Check out the repository at the commit that triggered the workflow
       - name: Set up repository
-        uses: actions/checkout@master
+        uses: actions/checkout@v4
 
-      - name: Set up repository
-        uses: actions/checkout@master
-        with:
-          ref: master
-
-      - name: Merge to master
-        run: git checkout --progress --force ${{ github.sha }}
-
+      # Validate the Gradle Wrapper to ensure it's safe and up-to-date
       - name: Validate Gradle Wrapper
         uses: gradle/wrapper-validation-action@v1
 
+      # Set up JDK 17 with JavaFX for the build environment
       - name: Setup JDK 17
         uses: actions/setup-java@v1
         with:
           java-version: "17"
           java-package: jdk+fx
 
+      # Build the project and run all checks using Gradle
       - name: Build and check with Gradle
         run: ./gradlew check
