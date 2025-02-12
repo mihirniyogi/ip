@@ -1,9 +1,0 @@
-list
-todo go for a walk
-todo touch grass
-deadline problem set 1 /by Saturday
-list
-mark 2
-event orbital meeting /from Tue 2.30pm /to Tue 3.30pm
-list
-bye
