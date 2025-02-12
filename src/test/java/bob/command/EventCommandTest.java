@@ -21,12 +21,13 @@
 
 //     @Test
 //     public void testEventCommand_validCommand_taskAdded() {
-//         EventCommand c = new EventCommand("Study Session @ CLB", 
-//                 LocalDateTime.of(2025, 3, 15, 14, 00), 
+//         EventCommand c = new EventCommand("Study Session @ CLB",
+//                 LocalDateTime.of(2025, 3, 15, 14, 00),
 //                 LocalDateTime.of(2025, 3, 15, 16, 00));
 //         c.execute(new Ui());
 //         assert TaskList.getCount() == taskNumberAdded;
-//         String expected = String.format("[E][ ] %s", "Study Session @ CLB (from: Mar 15 2025 2:00pm to: Mar 15 2025 4:00pm)");
+//         String expected = String.format("[E][ ] %s",
+//         "Study Session @ CLB (from: Mar 15 2025 2:00pm to: Mar 15 2025 4:00pm)");
 //         String actual = TaskList.getTask(taskNumberAdded).toString();
 //         assertEquals(expected, actual);
 //     }
