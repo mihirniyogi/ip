@@ -53,7 +53,7 @@ application {
 // To run the CLI version of this app
 // ./gradlew runcli
 task runcli(type: JavaExec) {
-    main = 'bob.cli.Bob'
+    main = 'bob.cli.Cli'
     classpath = sourceSets.main.runtimeClasspath
     standardInput = System.in
     jvmArgs = ['-ea'] // Enable assertions
