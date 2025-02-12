@@ -2,6 +2,7 @@ package bob.parser;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import bob.command.Command;
 import bob.command.DeadlineCommand;
@@ -14,6 +15,8 @@ import bob.command.MarkCommand;
 import bob.command.TodoCommand;
 import bob.command.UnmarkCommand;
 import bob.command.WrongCommandException;
+import bob.task.Task;
+import bob.task.TaskList;
 import bob.util.Helper;
 
 /**
@@ -141,8 +144,25 @@ public class Parser {
         }
 
         if (userInput.startsWith("delete")) {
-            int number = Integer.parseInt(userInput.split(" ")[1]);
-            return new DeleteCommand(number);
+            String[] parts = userInput.split(" ");
+
+            // if user gives no task number(s)
+            if (parts.length == 1) {
+                throw new WrongCommandException("Uh oh! Bob says...the task number(s) to delete cannot be empty.");
+            }
+
+            ArrayList<Task> tasks = new ArrayList<>();
+            for (int i = 1; i < parts.length; i++) {
+                try {
+                    int number = Integer.parseInt(parts[i]);
+                    tasks.add(TaskList.getTask(number));
+                } catch (NumberFormatException e) {
+                    throw new WrongCommandException("Uh oh! Bob says...task number(s) must be integers.");
+                } catch (IndexOutOfBoundsException e) {
+                    throw new WrongCommandException("Uh oh! Bob says...one of the task numbers does not exist.");
+                }
+            }
+            return new DeleteCommand(tasks);
         }
 
         throw new WrongCommandException("Unrecognised command!");

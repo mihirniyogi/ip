@@ -1,36 +1,49 @@
 package bob.command;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import bob.task.Task;
 import bob.task.TaskList;
-import bob.util.Formatter;
 
 /**
- * This class represents a command to delete a task.
+ * This class represents a command to delete a task (or more).
  */
 public class DeleteCommand extends Command {
 
-    private int number;
+    private ArrayList<Task> tasks;
 
-    public DeleteCommand(int number) {
-        this.number = number;
+    public DeleteCommand(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
     @Override
     public String execute() {
-        try {
-            Task task = TaskList.getTask(number);
-            TaskList.deleteTask(number);
-
-            String output = Formatter.format("Bob is on it! Deleted this task: ",
-                    task.toString(),
-                    "Now you have " + TaskList.getCount() + " task(s).");
-            return output;
-        } catch (IndexOutOfBoundsException e) {
-            return "Uh oh! Bob says...the task number does not exist.";
-        } catch (IOException e) {
-            return "Uh oh! Bob says...I couldn't save the task to the file.";
+        // checks if ALL task numbers entered are valid
+        if (!checkValidTasks()) {
+            return "Uh oh! Bob says...one of the task numbers does not exist.";
         }
+
+        StringBuilder output = new StringBuilder();
+        output.insert(0, "Bob is on it! Deleted the following task(s):");
+
+        try {
+            for (Task task : tasks) {
+                output.append(task.toString());
+                TaskList.deleteTask(task);
+            }
+            return output.toString();
+        } catch (IOException e) {
+            return "Uh oh! Bob says...I couldn't save the tasks to the file.";
+        }
+    }
+
+    private boolean checkValidTasks() {
+        for (Task task : tasks) {
+            if (!tasks.contains(task)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
