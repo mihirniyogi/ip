@@ -1,12 +1,7 @@
 package bob.gui;
 
-import java.io.IOException;
-
-import bob.command.Command;
 import bob.command.ExitCommand;
-import bob.command.WrongCommandException;
-import bob.parser.Parser;
-import bob.util.Formatter;
+import bob.core.Bob;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -46,39 +41,30 @@ public class MainWindow extends AnchorPane {
             return;
         }
 
-        String response = getResponse(input);
+        String response = Bob.processUserInput(input);
         dialogContainer.getChildren().add(DialogBox.getUserDialogBox(input));
-        dialogContainer.getChildren().add(DialogBox.getBobDialogBox(response));
-        userInput.clear();
-    }
 
-    /**
-     * Returns the response from Bob based on the user input.
-     *
-     * @param input user's input.
-     * @return String response from Bob.
-     */
-    private String getResponse(String input) {
-        try {
-            Command c = Parser.parse(input);
-            assert c != null : "Command should not be null";
+        // exit program if ExitCommand is called
+        // note: ExitCommand gives blank response
+        if (response.isBlank()) {
+            dialogContainer.getChildren().add(DialogBox.getBobDialogBox(ExitCommand.EXIT_MESSAGE));
 
-            String output = c.execute();
-            assert output != null : "Output should not be null";
+            new Thread(() -> {
+                try {
+                    Thread.sleep(500); // Delay for 0.5s before exit
+                    System.exit(0); // Exit the program after showing the message
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }).start();
 
-            if (c instanceof ExitCommand) {
-                System.exit(0);
-            }
-            return output;
-        } catch (WrongCommandException e) {
-            return Formatter.format(e.getMessage(), "Please try again!");
-        } catch (IndexOutOfBoundsException e) {
-            return Formatter.format("Uh oh! Bob says...I'm sorry, there is no such task :(");
-        } catch (NumberFormatException e) {
-            return Formatter.format("Uh oh! Bob says...I'm sorry, there is no such task :(");
-        } catch (IOException e) {
-            return Formatter.format("Uh oh! Bob says...I'm sorry, there was an error saving the task :(");
+        // if all is good, add Bob's response
+        // note: this else block is needed to prevent adding a blank dialog box
+        } else {
+            dialogContainer.getChildren().add(DialogBox.getBobDialogBox(response));
         }
+
+        userInput.clear();
     }
 
     /**
