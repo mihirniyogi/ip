@@ -1,5 +1,7 @@
 package bob.parser;
 
+import java.io.IOException;
+
 import bob.command.Command;
 import bob.command.WrongCommandException;
 
@@ -9,5 +11,9 @@ import bob.command.WrongCommandException;
  */
 @FunctionalInterface
 public interface ParseFunction {
-    Command apply(String userInput) throws WrongCommandException;
+    Command apply(String userInput) throws
+            WrongCommandException,
+            IOException,
+            NumberFormatException,
+            IndexOutOfBoundsException;
 }

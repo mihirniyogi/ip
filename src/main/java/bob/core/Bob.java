@@ -32,11 +32,13 @@ public class Bob {
         } catch (WrongCommandException e) {
             return Formatter.format(e.getMessage(), "Please try again!");
         } catch (IndexOutOfBoundsException e) {
-            return Formatter.format("Uh oh! Bob says...I'm sorry, there is no such task :(");
+            return Formatter.format("Uh oh! Bob says...one of the task numbers does not exist :(");
         } catch (NumberFormatException e) {
-            return Formatter.format("Uh oh! Bob says...I'm sorry, there is no such task :(");
+            return Formatter.format("Uh oh! Bob says...task number(s) must be integers :(");
         } catch (IOException e) {
             return Formatter.format("Uh oh! Bob says...I'm sorry, there was an error saving the task :(");
+        } catch (Exception e) {
+            return Formatter.format("Uh oh! Bob says...I'm sorry, there was an error :(");
         }
     }
 }
