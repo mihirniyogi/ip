@@ -12,5 +12,5 @@ public abstract class Command {
      *
      * @return String output.
      */
-    public abstract String execute();
+    public abstract String execute() throws Exception;
 }

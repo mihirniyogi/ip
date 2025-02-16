@@ -49,12 +49,12 @@ public class Parser {
         return new ListCommand();
     }
 
-    private static Command parseMark(String userInput) {
+    private static Command parseMark(String userInput) throws NumberFormatException {
         int number = Integer.parseInt(userInput.split(" ")[1]);
         return new MarkCommand(number);
     }
 
-    private static Command parseUnmark(String userInput) {
+    private static Command parseUnmark(String userInput) throws NumberFormatException {
         int number = Integer.parseInt(userInput.split(" ")[1]);
         return new UnmarkCommand(number);
     }
@@ -150,7 +150,11 @@ public class Parser {
         return new EventCommand(description, from, to);
     }
 
-    private static Command parseDelete(String userInput) throws WrongCommandException {
+    private static Command parseDelete(String userInput) throws
+            WrongCommandException,
+            IndexOutOfBoundsException,
+            NumberFormatException {
+
         String[] parts = userInput.split(" ");
 
         // if user gives no task number(s)
@@ -160,14 +164,8 @@ public class Parser {
 
         ArrayList<Task> tasks = new ArrayList<>();
         for (int i = 1; i < parts.length; i++) {
-            try {
-                int number = Integer.parseInt(parts[i]);
-                tasks.add(TaskList.getTask(number));
-            } catch (NumberFormatException e) {
-                throw new WrongCommandException("Uh oh! Bob says...task number(s) must be integers.");
-            } catch (IndexOutOfBoundsException e) {
-                throw new WrongCommandException("Uh oh! Bob says...one of the task numbers does not exist.");
-            }
+            int number = Integer.parseInt(parts[i]);
+            tasks.add(TaskList.getTask(number));
         }
         return new DeleteCommand(tasks);
     }
@@ -180,7 +178,12 @@ public class Parser {
      * @throws WrongCommandException if the user input is invalid.
      * @throws IOException if there is an error saving to file.
      */
-    public static Command parse(String userInput) throws WrongCommandException, IOException {
+    public static Command parse(String userInput) throws
+            WrongCommandException,
+            IOException,
+            NumberFormatException,
+            IndexOutOfBoundsException {
+
         String commandKey = userInput.split(" ")[0];
         ParseFunction commandFunction = COMMAND_MAP.get(commandKey);
 

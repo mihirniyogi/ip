@@ -17,16 +17,10 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public String execute() {
-        try {
-            TaskList.markTask(number);
-            String output = Formatter.format("Bob is on it! Marked the following as done [X]:",
-                    TaskList.getTask(number).toString());
-            return output;
-        } catch (IndexOutOfBoundsException e) {
-            return "Uh oh! Bob says...the task number does not exist.";
-        } catch (IOException e) {
-            return "Uh oh! Bob says...I couldn't save the task to the file.";
-        }
+    public String execute() throws IndexOutOfBoundsException, IOException {
+        TaskList.markTask(number);
+        String output = Formatter.format("Bob is on it! Marked the following as done [X]:",
+                TaskList.getTask(number).toString());
+        return output;
     }
 }
