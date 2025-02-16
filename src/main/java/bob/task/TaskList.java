@@ -1,6 +1,7 @@
 package bob.task;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import bob.storage.Storage;
@@ -13,7 +14,8 @@ import bob.storage.Storage;
  *     <li> {@link #getTask(int)} </li>
  *     <li> {@link #getTasks()} </li>
  *     <li> {@link #addTask(Task)} </li>
- *     <li> {@link #deleteTask(Task)} </li>
+ *     <li> {@link #deleteTaskByNumber(int)} </li>
+ *     <li> {@link #deleteTasks(ArrayList)} </li>
  *     <li> {@link #markTask(int)} </li>
  *     <li> {@link #unmarkTask(int)} </li>
  * </ul>
@@ -25,16 +27,13 @@ import bob.storage.Storage;
 public class TaskList {
     private static List<Task> tasks;
 
-    static {
-        tasks = Storage.fetchTasksFromFile();
-    }
-
     /**
      * Returns the number of tasks in the list.
      *
      * @return size of list (int).
      */
     public static int getCount() {
+        tasks = Storage.fetchTasksFromFile();
         return tasks.size();
     }
 
@@ -46,6 +45,7 @@ public class TaskList {
      * @return Task object.
      */
     public static Task getTask(int number) throws IndexOutOfBoundsException {
+        tasks = Storage.fetchTasksFromFile();
         return tasks.get(number - 1);
     }
 
@@ -55,6 +55,7 @@ public class TaskList {
      * @returns List of Task objects.
      */
     public static List<Task> getTasks() {
+        tasks = Storage.fetchTasksFromFile();
         return List.copyOf(tasks);
     }
 
@@ -65,30 +66,23 @@ public class TaskList {
      * @throws IOException if error during file IO.
      */
     public static void addTask(Task task) throws IOException {
+        tasks = Storage.fetchTasksFromFile();
         tasks.add(task);
         Storage.saveTasksToFile(tasks);
     }
 
     /**
-     * Deletes a task from the list.
+     * Deletes specified tasks from the list.
      *
-     * @param number (1-indexed).
+     * @param taskNumbers task numbers to be deleted.
      * @throws IOException if error during file IO.
      */
-    public static void deleteTaskByNumber(int number) throws IOException {
-        assert number > 0 && number <= tasks.size();
-        tasks.remove(number - 1);
-        Storage.saveTasksToFile(tasks);
-    }
+    public static void deleteTasks(List<Integer> taskNumbers) throws IOException {
+        tasks = Storage.fetchTasksFromFile();
 
-    /**
-     * Deletes a task from the list.
-     *
-     * @param task Task to be deleted.
-     * @throws IOException if error during file IO.
-     */
-    public static void deleteTask(Task task) throws IOException {
-        tasks.remove(task);
+        // removeIf allows deletion without modifying list while iterating
+        tasks.removeIf(task -> taskNumbers.contains(tasks.indexOf(task) + 1));
+
         Storage.saveTasksToFile(tasks);
     }
 
@@ -100,6 +94,7 @@ public class TaskList {
      * @throws IndexOutOfBoundsException if number is out of range.
      */
     public static void markTask(int number) throws IOException, IndexOutOfBoundsException {
+        tasks = Storage.fetchTasksFromFile();
         tasks.get(number - 1).mark();
         Storage.saveTasksToFile(tasks);
     }
@@ -112,6 +107,7 @@ public class TaskList {
      * @throws IndexOutOfBoundsException if number is out of range.
      */
     public static void unmarkTask(int number) throws IOException, IndexOutOfBoundsException {
+        tasks = Storage.fetchTasksFromFile();
         tasks.get(number - 1).unmark();
         Storage.saveTasksToFile(tasks);
     }

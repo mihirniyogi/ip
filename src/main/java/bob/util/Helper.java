@@ -1,6 +1,7 @@
 package bob.util;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 /**
  * This class contains static helper methods for Bob.
@@ -14,7 +15,9 @@ public class Helper {
      * @return String.
      */
     public static String datetimeToReadable(LocalDateTime dateTime) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy h:mma");
+        // 'withLocale' is needed to ensure AM/PM capitalisation is standard across OS-es
+        // Locale.US ensures AM/PM is capitalised
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy h:mma").withLocale(Locale.US);
         return dateTime.format(formatter);
     }
 

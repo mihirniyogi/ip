@@ -1,36 +1,54 @@
-// package bob.command;
+package bob.command;
 
-// import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-// import java.io.IOException;
-// import org.junit.jupiter.api.AfterEach;
-// import org.junit.jupiter.api.BeforeEach;
-// import org.junit.jupiter.api.Test;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
 
-// import bob.cli.Ui;
-// import bob.task.TaskList;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-// public class TodoCommandTest {
+import bob.storage.Storage;
+import bob.task.TaskList;
+import bob.util.Formatter;
 
-//     private int taskNumberAdded;
+/**
+ * Tests whether TodoCommand is correctly executed.
+ * Creates temporary task list for testing.
+ */
+public class TodoCommandTest {
 
-//     @BeforeEach
-//     public void setUp() {
-//         this.taskNumberAdded = TaskList.getCount() + 1;
-//     }
+    private static final int TASK_NUMBER = 1;
 
-//     @Test
-//     public void testTodoCommand_validCommand_taskAdded() {
-//         TodoCommand c = new TodoCommand("go for a run");
-//         c.execute(new Ui());
-//         assert TaskList.getCount() == taskNumberAdded;
-//         String expected = String.format("[T][ ] %s", "go for a run");
-//         String actual = TaskList.getTask(taskNumberAdded).toString();
-//         assertEquals(expected, actual);
-//     }
+    @BeforeEach
+    public void setUp() throws IOException {
+        // Create a temporary file for task list
+        Path filePath = Files.createTempFile("tasklist", ".csv");
+        filePath.toFile().deleteOnExit();
 
-//     @AfterEach
-//     public void tearDown() throws IOException {
-//         TaskList.deleteTask(taskNumberAdded);
-//     }
-// }
+        // Set the file path to the temporary file
+        Storage.setFilePathTo(filePath);
+    }
+
+    @Test
+    public void testTodoCommand_taskAdded() throws IOException {
+        TodoCommand c = new TodoCommand("go for a run");
+
+        String actualResponse = c.execute();
+        String expectedResponse = Formatter.format("Bob is on it! I've added this task:",
+                "[T][ ] go for a run",
+                "Now you have " + TaskList.getCount() + " task(s).");
+
+        assertEquals(expectedResponse, actualResponse);
+        assertEquals(TaskList.getCount(), TASK_NUMBER);
+    }
+
+    @AfterEach
+    public void tearDown() throws IOException {
+        TaskList.deleteTasks(List.of(TASK_NUMBER));
+        Storage.resetFilePath();
+    }
+}

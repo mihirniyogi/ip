@@ -17,8 +17,6 @@ import bob.command.MarkCommand;
 import bob.command.TodoCommand;
 import bob.command.UnmarkCommand;
 import bob.command.WrongCommandException;
-import bob.task.Task;
-import bob.task.TaskList;
 import bob.util.Helper;
 
 /**
@@ -162,12 +160,12 @@ public class Parser {
             throw new WrongCommandException("Uh oh! Bob says...the task number(s) to delete cannot be empty.");
         }
 
-        ArrayList<Task> tasks = new ArrayList<>();
+        ArrayList<Integer> taskNumbers = new ArrayList<>();
         for (int i = 1; i < parts.length; i++) {
             int number = Integer.parseInt(parts[i]);
-            tasks.add(TaskList.getTask(number));
+            taskNumbers.add(number);
         }
-        return new DeleteCommand(tasks);
+        return new DeleteCommand(taskNumbers);
     }
 
     /**
@@ -177,6 +175,8 @@ public class Parser {
      * @return Command object.
      * @throws WrongCommandException if the user input is invalid.
      * @throws IOException if there is an error saving to file.
+     * @throws NumberFormatException if the user inputs NaN.
+     * @throws IndexOutOfBoundsException if the user inputs a task beyond the list.
      */
     public static Command parse(String userInput) throws
             WrongCommandException,

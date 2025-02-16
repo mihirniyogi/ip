@@ -2,6 +2,7 @@ package bob.command;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import bob.task.Task;
 import bob.task.TaskList;
@@ -11,22 +12,25 @@ import bob.task.TaskList;
  */
 public class DeleteCommand extends Command {
 
-    private ArrayList<Task> tasks;
+    private List<Integer> taskNumbers;
 
-    public DeleteCommand(ArrayList<Task> tasks) {
-        this.tasks = tasks;
+    public DeleteCommand(ArrayList<Integer> taskNumbers) {
+        this.taskNumbers = taskNumbers;
     }
 
     @Override
-    public String execute() throws IOException {
+    public String execute() throws IOException, IndexOutOfBoundsException {
 
         StringBuilder output = new StringBuilder();
         output.insert(0, "Bob is on it! Deleted the following task(s):");
 
-        for (Task task : tasks) {
-            output.append(task.toString());
-            TaskList.deleteTask(task);
+        for (int number : taskNumbers) {
+            Task task = TaskList.getTask(number);
+            output.append("\n").append(task.toString());
         }
+
+        TaskList.deleteTasks(taskNumbers);
+
         return output.toString();
     }
 }
