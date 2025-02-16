@@ -1,36 +1,56 @@
-// package bob.command;
+package bob.command;
 
-// import static org.junit.jupiter.api.Assertions.assertEquals;
-// import java.io.IOException;
-// import java.time.LocalDateTime;
-// import org.junit.jupiter.api.AfterEach;
-// import org.junit.jupiter.api.BeforeEach;
-// import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-// import bob.cli.Ui;
-// import bob.task.TaskList;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.util.List;
 
-// public class DeadlineCommandTest {
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-//     private int taskNumberAdded;
+import bob.storage.Storage;
+import bob.task.TaskList;
+import bob.util.Formatter;
 
-//     @BeforeEach
-//     public void setUp() {
-//         this.taskNumberAdded = TaskList.getCount() + 1;
-//     }
+/**
+ * Tests whether DeadlineCommand is correctly executed.
+ * Creates temporary task list for testing.
+ */
+public class DeadlineCommandTest {
 
-//     @Test
-//     public void testDeadlineCommand_validCommand_taskAdded() {
-//         DeadlineCommand c = new DeadlineCommand("Problem Set 1", LocalDateTime.of(2025, 3, 31, 23, 59));
-//         c.execute(new Ui());
-//         assert TaskList.getCount() == taskNumberAdded;
-//         String expected = String.format("[D][ ] %s", "Problem Set 1 (by: Mar 31 2025 11:59pm)");
-//         String actual = TaskList.getTask(taskNumberAdded).toString();
-//         assertEquals(expected, actual);
-//     }
+    private static final int TASK_NUMBER = 1;
 
-//     @AfterEach
-//     public void tearDown() throws IOException {
-//         TaskList.deleteTask(taskNumberAdded);
-//     }
-// }
+    @BeforeEach
+    public void setUp() throws IOException {
+        // Create a temporary file for task list
+        Path filePath = Files.createTempFile("tasklist", ".csv");
+        filePath.toFile().deleteOnExit();
+
+        // Set the file path to the temporary file
+        Storage.setFilePathTo(filePath);
+    }
+
+    @Test
+    public void testDeadlineCommand_taskAdded() throws IOException {
+        LocalDateTime by = LocalDateTime.of(2025, 3, 1, 23, 59);
+        DeadlineCommand c = new DeadlineCommand("assignment 3", by);
+
+        String actualResponse = c.execute();
+        String expectedResponse = Formatter.format("Bob is on it! I've added this task:",
+                "[D][ ] assignment 3 (by: Mar 1 2025 11:59pm)",
+                "Now you have " + TaskList.getCount() + " task(s).");
+
+        assertEquals(expectedResponse, actualResponse);
+        assertEquals(TaskList.getCount(), TASK_NUMBER);
+    }
+
+    @AfterEach
+    public void tearDown() throws IOException {
+        TaskList.deleteTasks(List.of(TASK_NUMBER));
+        Storage.resetFilePath();
+    }
+}

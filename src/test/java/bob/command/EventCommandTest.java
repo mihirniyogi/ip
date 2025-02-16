@@ -1,39 +1,57 @@
-// package bob.command;
+package bob.command;
 
-// import static org.junit.jupiter.api.Assertions.assertEquals;
-// import java.io.IOException;
-// import java.time.LocalDateTime;
-// import org.junit.jupiter.api.AfterEach;
-// import org.junit.jupiter.api.BeforeEach;
-// import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-// import bob.cli.Ui;
-// import bob.task.TaskList;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.util.List;
 
-// public class EventCommandTest {
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-//     private int taskNumberAdded;
+import bob.storage.Storage;
+import bob.task.TaskList;
+import bob.util.Formatter;
 
-//     @BeforeEach
-//     public void setUp() {
-//         this.taskNumberAdded = TaskList.getCount() + 1;
-//     }
+/**
+ * Tests whether EventCommand is correctly executed.
+ * Creates temporary task list for testing.
+ */
+public class EventCommandTest {
 
-//     @Test
-//     public void testEventCommand_validCommand_taskAdded() {
-//         EventCommand c = new EventCommand("Study Session @ CLB",
-//                 LocalDateTime.of(2025, 3, 15, 14, 00),
-//                 LocalDateTime.of(2025, 3, 15, 16, 00));
-//         c.execute(new Ui());
-//         assert TaskList.getCount() == taskNumberAdded;
-//         String expected = String.format("[E][ ] %s",
-//         "Study Session @ CLB (from: Mar 15 2025 2:00pm to: Mar 15 2025 4:00pm)");
-//         String actual = TaskList.getTask(taskNumberAdded).toString();
-//         assertEquals(expected, actual);
-//     }
+    private static final int TASK_NUMBER = 1;
 
-//     @AfterEach
-//     public void tearDown() throws IOException {
-//         TaskList.deleteTask(taskNumberAdded);
-//     }
-// }
+    @BeforeEach
+    public void setUp() throws IOException {
+        // Create a temporary file for task list
+        Path filePath = Files.createTempFile("tasklist", ".csv");
+        filePath.toFile().deleteOnExit();
+
+        // Set the file path to the temporary file
+        Storage.setFilePathTo(filePath);
+    }
+
+    @Test
+    public void testEventCommand_taskAdded() throws IOException {
+        LocalDateTime from = LocalDateTime.of(2025, 3, 5, 14, 00);
+        LocalDateTime to = LocalDateTime.of(2025, 3, 5, 16, 30);
+        EventCommand c = new EventCommand("project meeting", from, to);
+
+        String actualResponse = c.execute();
+        String expectedResponse = Formatter.format("Bob is on it! I've added this task:",
+                "[E][ ] project meeting (from: Mar 5 2025 2:00pm to: Mar 5 2025 4:30pm)",
+                "Now you have " + TaskList.getCount() + " task(s).");
+
+        assertEquals(expectedResponse, actualResponse);
+        assertEquals(TaskList.getCount(), TASK_NUMBER);
+    }
+
+    @AfterEach
+    public void tearDown() throws IOException {
+        TaskList.deleteTasks(List.of(TASK_NUMBER));
+        Storage.resetFilePath();
+    }
+}
