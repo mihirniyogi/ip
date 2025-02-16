@@ -42,7 +42,7 @@ public class EventCommandTest {
 
         String actualResponse = c.execute();
         String expectedResponse = Formatter.format("Bob is on it! I've added this task:",
-                "[E][ ] project meeting (from: Mar 5 2025 2:00pm to: Mar 5 2025 4:30pm)",
+                "[E][ ] project meeting (from: Mar 5 2025 2:00PM to: Mar 5 2025 4:30PM)",
                 "Now you have " + TaskList.getCount() + " task(s).");
 
         assertEquals(expectedResponse, actualResponse);

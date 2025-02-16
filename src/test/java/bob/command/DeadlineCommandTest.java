@@ -41,7 +41,7 @@ public class DeadlineCommandTest {
 
         String actualResponse = c.execute();
         String expectedResponse = Formatter.format("Bob is on it! I've added this task:",
-                "[D][ ] assignment 3 (by: Mar 1 2025 11:59pm)",
+                "[D][ ] assignment 3 (by: Mar 1 2025 11:59PM)",
                 "Now you have " + TaskList.getCount() + " task(s).");
 
         assertEquals(expectedResponse, actualResponse);
