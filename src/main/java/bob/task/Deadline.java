@@ -48,6 +48,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toCsv() {
-        return String.format("D,%s,%b,%s,,", this.description, this.completed, this.by);
+        return String.format("D,%s,%b,%s,,", this.description, this.isCompleted, this.by);
     }
 }

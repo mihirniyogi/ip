@@ -8,7 +8,7 @@ package bob.task;
  * CSV string.
  */
 public abstract class Task {
-    protected boolean completed;
+    protected boolean isCompleted;
     protected final String description;
 
     /**
@@ -18,7 +18,7 @@ public abstract class Task {
      */
     public Task(String description) {
         this.description = description;
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     /**
@@ -29,7 +29,7 @@ public abstract class Task {
      */
     public Task(String description, boolean completed) {
         this.description = description;
-        this.completed = completed;
+        this.isCompleted = completed;
     }
 
     /**
@@ -43,14 +43,14 @@ public abstract class Task {
      * Marks the task as completed.
      */
     public void mark() {
-        this.completed = true;
+        this.isCompleted = true;
     }
 
     /**
      * Unmarks the task as completed.
      */
     public void unmark() {
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     /**
@@ -58,6 +58,6 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return (this.completed ? "[X] " : "[ ] ") + description;
+        return (this.isCompleted ? "[X] " : "[ ] ") + description;
     }
 }

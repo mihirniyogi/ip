@@ -37,6 +37,6 @@ public class Todo extends Task {
      */
     @Override
     public String toCsv() {
-        return String.format("T,%s,%b,,,", this.description, this.completed);
+        return String.format("T,%s,%b,,,", this.description, this.isCompleted);
     }
 }

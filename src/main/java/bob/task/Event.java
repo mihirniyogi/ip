@@ -54,6 +54,6 @@ public class Event extends Task {
      */
     @Override
     public String toCsv() {
-        return String.format("E,%s,%b,,%s,%s", this.description, this.completed, this.from, this.to);
+        return String.format("E,%s,%b,,%s,%s", this.description, this.isCompleted, this.from, this.to);
     }
 }
