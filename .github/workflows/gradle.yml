@@ -33,6 +33,5 @@ jobs:
           java-package: jdk+fx
 
       # Build the project and run all checks using Gradle
-      # excludes checkstyleTest for now (will fix tests later)
       - name: Build and check with Gradle
-        run: ./gradlew check -x checkstyleTest
+        run: ./gradlew check
