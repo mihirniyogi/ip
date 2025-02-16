@@ -183,6 +183,11 @@ public class Parser {
     public static Command parse(String userInput) throws WrongCommandException, IOException {
         String commandKey = userInput.split(" ")[0];
         ParseFunction commandFunction = COMMAND_MAP.get(commandKey);
+
+        if (commandFunction == null) {
+            throw new WrongCommandException("Unrecognised command!");
+        }
+
         Command c = commandFunction.apply(userInput);
         return c;
     }
