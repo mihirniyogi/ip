@@ -28,18 +28,20 @@ import bob.task.Todo;
  */
 public class Storage {
     private static final String FILE_NAME = "tasks.csv";
-    private static final Path FILE_PATH = Paths.get(System.getProperty("user.home"), FILE_NAME);
     private static final String HEADER = "id,type,description,done,by,from,to";
+    private static final Path DEFAULT_FILE_PATH = Paths.get(System.getProperty("user.home"), FILE_NAME);
+
+    private static Path filePath = DEFAULT_FILE_PATH;
 
     static {
         createFileIfNotExist();
     }
 
     private static void createFileIfNotExist() {
-        if (!Files.exists(FILE_PATH)) {
+        if (!Files.exists(filePath)) {
             try {
-                Files.createFile(FILE_PATH);
-                Files.write(FILE_PATH, HEADER.getBytes(StandardCharsets.UTF_8), StandardOpenOption.WRITE);
+                Files.createFile(filePath);
+                Files.write(filePath, HEADER.getBytes(StandardCharsets.UTF_8), StandardOpenOption.WRITE);
             } catch (IOException e) {
                 System.err.println("Error creating file: " + e.getMessage());
             }
@@ -91,7 +93,7 @@ public class Storage {
      */
     public static List<Task> fetchTasksFromFile() {
         try {
-            List<Task> tasks = Files.lines(FILE_PATH)
+            List<Task> tasks = Files.lines(filePath)
                     .skip(1)
                     .map(Storage::convertLineToTask)
                     .collect(Collectors.toList());
@@ -116,6 +118,24 @@ public class Storage {
                 tasks.stream().map(task -> (tasks.indexOf(task) + 1) + "," + task.toCsv())
                 )
                 .collect(Collectors.joining("\n"));
-        Files.write(FILE_PATH, lines.getBytes(StandardCharsets.UTF_8), StandardOpenOption.TRUNCATE_EXISTING);
+        Files.write(filePath, lines.getBytes(StandardCharsets.UTF_8), StandardOpenOption.TRUNCATE_EXISTING);
+    }
+
+    /**
+     * Returns the file path of the storage file.
+     * Used for testing purposes.
+     *
+     * @param filePath file path.
+     */
+    public static void setFilePathTo(Path filePath) {
+        Storage.filePath = filePath;
+    }
+
+    /**
+     * Resets the file path to the default file path.
+     * Used for testing purposes.
+     */
+    public static void resetFilePath() {
+        Storage.filePath = DEFAULT_FILE_PATH;
     }
 }
